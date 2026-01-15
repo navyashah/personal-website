@@ -196,7 +196,7 @@ function showNotification(message, type = 'info') {
 }
 
 // Typing animation for hero title
-function typeWriter(element, text, speed = 100) {
+function typeWriter(element, text, speed = 120) {
     let i = 0;
     element.innerHTML = '';
     
@@ -221,7 +221,7 @@ document.addEventListener('DOMContentLoaded', () => {
             heroTitle.style.minHeight = originalHeight + 'px';
         }
         setTimeout(() => {
-            typeWriter(heroTitle, originalText, 80);
+            typeWriter(heroTitle, originalText, 35);
         }, 500);
     }
 });
