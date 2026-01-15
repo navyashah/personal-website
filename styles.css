@@ -527,10 +527,15 @@ p {
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     border: 1px solid #e2e8f0;
     flex: 0 0 calc(33.333% - 1.4rem);
+    display: flex;
+    flex-direction: column;
 }
 
 .project-content {
     padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
 }
 
 .project-content h3 {
@@ -556,6 +561,11 @@ p {
     border-radius: 20px;
     font-size: 0.8rem;
     font-weight: 500;
+}
+
+.project-content .btn {
+    margin-top: auto;
+    align-self: flex-start;
 }
 
 .projects-arrow {
