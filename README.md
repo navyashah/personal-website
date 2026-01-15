@@ -25,7 +25,4 @@ The site is built with plain HTML, CSS, and JavaScript to keep things lightweigh
 - Font Awesome  
 - Google Fonts  
 
----
-
-## Project Structure
 
