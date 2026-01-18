@@ -1,4 +1,4 @@
-# Personal Portfolio Website
+# Personal Portfolio Website: https://navyashah.github.io/personal-website/
 
 This repository contains the source code for my personal portfolio website. The site serves as a central place to showcase my projects, research, and experience across data science, cybersecurity, and consulting-focused work. It’s designed to be clean, fast, and easy to navigate—no frameworks, no unnecessary bloat.
 
