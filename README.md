@@ -1,28 +1,19 @@
-# Personal Portfolio Website: https://navyashah.github.io/personal-website/
+# navyashah.me
 
-This repository contains the source code for my personal portfolio website. The site serves as a central place to showcase my projects, research, and experience across data science, cybersecurity, and consulting-focused work. It’s designed to be clean, fast, and easy to navigate—no frameworks, no unnecessary bloat.
+Personal website built as a pixel OS desktop — draggable windows, custom cursor, and a mobile swipe version.
 
-The site is built with plain HTML, CSS, and JavaScript to keep things lightweight and fully customizable.
+**Live:** [navyashah.me](https://navyashah.me)
 
----
+## Structure
 
-## What This Site Includes
+- `index.html` — desktop site (pixel OS)
+- `mobile.html` — mobile site (swipe cards), auto-loads on phones
+- `media/` — images, PDFs, and research files
 
-- Responsive layout that works across desktop, tablet, and mobile  
-- Project-focused design with concise descriptions and clear takeaways  
-- Smooth interactions (scrolling, hover states, subtle animations)  
-- Skills and experience sections optimized for quick scanning  
-- Straightforward contact section without third-party dependencies  
-- Fast load times with minimal JavaScript
+## Stack
 
----
+Plain HTML, CSS, and JavaScript. No frameworks, no build step.
 
-## Tech Stack
+## Sections
 
-- HTML5  
-- CSS3 (Flexbox + Grid)  
-- JavaScript (ES6)  
-- Font Awesome  
-- Google Fonts  
-
-
+About · Work · Education · Builds · Skills · Research · Hire
