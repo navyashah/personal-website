@@ -656,6 +656,10 @@ body.dragging, body.dragging * {
 </div>
 
 <script>
+if (/Mobi|Android|iPhone|iPad/i.test(navigator.userAgent)) {
+  window.location.replace('/mobile.html');
+}
+
 let zTop=100, openCount=0;
 const openMap={};
 const WIN_LABELS={about:'ABOUT',exp:'WORK',edu:'EDU',proj:'BUILDS',skills:'SKILLS',contact:'HIRE',research:'RESEARCH',help:'HELP'};
@@ -707,7 +711,13 @@ function openWin(id){
 
 function closeWin(id){
   const w=document.getElementById('win-'+id);
-  if(w){w.classList.remove('open','focused','minimized');delete openMap[id];updateTaskbar();}
+  if(w){
+    w.classList.remove('open','focused','minimized');
+    w.style.width='';
+    const body=w.querySelector('.win-body');
+    if(body) body.style.maxHeight='';
+    delete openMap[id];updateTaskbar();
+  }
 }
 
 function minWin(id){document.getElementById('win-'+id)?.classList.toggle('minimized')}
