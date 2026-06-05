@@ -1,457 +1,543 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Navya Shah - Personal Website</title>
-    <meta name="description" content="Navya Shah - USC grad with a background in cybersecurity, product, and finance.">
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%9C%8C%EF%B8%8F%3C/text%3E%3C/svg%3E">
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NAVYA OS — navyashah.dev</title>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;overflow:hidden;font-family:'Press Start 2P',monospace;background:#1a2e1a}
+body{background-image:radial-gradient(circle,rgba(255,255,255,.04) 1px,transparent 1px);background-size:22px 22px;user-select:none}
+body.dragging{cursor:grabbing!important}
+body.dragging *{cursor:grabbing!important}
+
+/* ── MENUBAR ─────────────────────────── */
+.menubar{
+  position:fixed;top:0;left:0;right:0;height:22px;
+  background:#f0ead8;border-bottom:2px solid #1a1a1a;
+  display:flex;align-items:center;padding:0 10px;gap:20px;z-index:9000
+}
+.brand{font-size:7px;color:#8B2635;letter-spacing:1px}
+.menu-item{font-size:6px;color:#1a1a1a;padding:2px 4px;cursor:default}
+.menu-item:hover{background:rgba(139,38,53,.15)}
+.menu-right{margin-left:auto;font-size:6px;color:#888}
+
+/* ── DESKTOP ─────────────────────────── */
+.desktop{position:fixed;top:22px;left:0;right:0;bottom:38px;overflow:hidden}
+
+.watermark{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  text-align:center;pointer-events:none;z-index:0
+}
+.wm-line{font-size:11px;color:rgba(255,255,255,.05);letter-spacing:5px;line-height:3.2}
+
+/* ── ICONS ───────────────────────────── */
+.icons{
+  position:absolute;top:14px;left:14px;
+  display:flex;flex-direction:column;gap:8px;z-index:10
+}
+.icon{
+  width:70px;display:flex;flex-direction:column;
+  align-items:center;gap:5px;cursor:pointer;padding:3px
+}
+.icon-box{
+  width:46px;height:46px;
+  background:rgba(255,255,255,.1);
+  border:2px solid rgba(255,255,255,.18);
+  display:flex;align-items:center;justify-content:center;
+  font-size:20px;box-shadow:2px 2px 0 rgba(0,0,0,.45);
+  transition:background .1s,border-color .1s;image-rendering:pixelated
+}
+.icon:hover .icon-box{background:rgba(240,192,64,.28);border-color:#f0c040}
+.icon:active .icon-box{transform:translate(1px,1px);box-shadow:1px 1px 0 rgba(0,0,0,.45)}
+.icon-label{font-size:5.5px;color:#fff;text-shadow:1px 1px 0 #000;text-align:center;line-height:1.5}
+
+/* ── WINDOWS ─────────────────────────── */
+@keyframes win-pop{from{opacity:0;transform:scale(.93)}to{opacity:1;transform:scale(1)}}
+
+.window{
+  position:absolute;background:#f5f0e8;
+  border:3px solid #1a1a1a;box-shadow:4px 4px 0 #1a1a1a;
+  display:none;z-index:100;min-width:380px
+}
+.window.open{display:block;animation:win-pop .1s ease-out}
+.window.focused{z-index:500}
+.window.minimized .win-body{display:none}
+
+.titlebar{
+  background:#8B2635;color:#f5f0e8;
+  height:26px;display:flex;align-items:center;padding:0 7px;gap:6px;
+  cursor:grab;user-select:none
+}
+.titlebar:active{cursor:grabbing}
+.tb-title{font-size:7px;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tb-btns{display:flex;gap:3px;flex-shrink:0}
+.tb-btn{
+  width:14px;height:14px;border:2px solid #1a1a1a;
+  background:#f5f0e8;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  font-size:7px;color:#1a1a1a;line-height:1;font-family:'Press Start 2P',monospace
+}
+.tb-btn:hover{background:#f0c040}
+
+.win-body{
+  padding:14px 16px;font-family:'VT323',monospace;
+  font-size:19px;color:#1a1a1a;
+  max-height:400px;overflow-y:auto;line-height:1.55
+}
+.win-body::-webkit-scrollbar{width:8px}
+.win-body::-webkit-scrollbar-track{background:#f5f0e8}
+.win-body::-webkit-scrollbar-thumb{background:#8B2635}
+
+.win-section{
+  font-size:8.5px;font-family:'Press Start 2P',monospace;color:#8B2635;
+  border-bottom:2px solid #1a1a1a;padding-bottom:6px;margin-bottom:12px;line-height:1.6
+}
+.wp{margin-bottom:10px}
+
+.tag{
+  display:inline-block;background:#8B2635;color:#f5f0e8;
+  font-size:13px;font-family:'VT323',monospace;padding:1px 7px;margin:2px
+}
+.tag.green{background:#1a5c2a}
+.tag.navy{background:#1a2e5c}
+
+.job{margin-bottom:16px}
+.job-co{color:#8B2635;font-size:20px;font-weight:bold}
+.job-role{color:#666;font-size:15px;margin-top:2px}
+.job-body{margin-top:6px;font-size:18px}
+.bullet{margin-left:0;margin-bottom:4px}
+.bullet::before{content:'▸ ';color:#8B2635}
+.divider{border:none;border-top:2px dashed #d0c4b0;margin:12px 0}
+
+.stat-row{display:flex;gap:10px;margin:14px 0}
+.stat-box{
+  flex:1;background:#fff;border:2px solid #1a1a1a;
+  padding:8px 6px;text-align:center;
+  box-shadow:2px 2px 0 #1a1a1a
+}
+.stat-num{font-size:18px;color:#8B2635;display:block;font-family:'Press Start 2P',monospace}
+.stat-label{font-size:12px;color:#666;display:block;margin-top:4px}
+
+.proj-title{color:#8B2635;font-size:19px;font-weight:bold}
+.proj-award{
+  display:inline-block;background:#f0c040;color:#1a1a1a;
+  font-size:11px;font-family:'Press Start 2P',monospace;
+  padding:2px 6px;margin-left:6px;border:1px solid #1a1a1a;vertical-align:middle
+}
+.proj-tags{margin-top:5px}
+.proj-link{
+  font-size:13px;color:#1a2e5c;text-decoration:underline;cursor:pointer;
+  font-family:'VT323',monospace
+}
+
+.skills-group{margin-bottom:14px}
+.skills-label{font-size:8px;font-family:'Press Start 2P',monospace;color:#555;margin-bottom:6px}
+
+.contact-link{
+  display:flex;align-items:center;gap:8px;
+  padding:6px 0;border-bottom:1px dashed #d0c4b0;font-size:18px
+}
+.contact-link:last-child{border-bottom:none}
+.contact-icon{font-size:16px}
+.contact-val{color:#1a2e5c;text-decoration:underline;cursor:pointer}
+
+/* ── TASKBAR ─────────────────────────── */
+.taskbar{
+  position:fixed;bottom:0;left:0;right:0;height:38px;
+  background:#111;border-top:2px solid #2a2a2a;
+  display:flex;align-items:center;padding:0 8px;gap:6px;z-index:9000
+}
+.start-btn{
+  background:#8B2635;color:#fff;font-size:7px;
+  padding:5px 9px;border:2px solid rgba(255,255,255,.25);
+  cursor:pointer;white-space:nowrap;flex-shrink:0
+}
+.start-btn:hover{background:#a53040}
+.tb-sep{width:1px;height:22px;background:#2a2a2a;flex-shrink:0;margin:0 2px}
+.tb-items{display:flex;gap:4px;flex:1;overflow:hidden;min-width:0}
+.tb-item{
+  background:rgba(255,255,255,.08);color:rgba(255,255,255,.75);
+  font-size:6px;padding:4px 7px;border:1px solid rgba(255,255,255,.1);
+  cursor:pointer;white-space:nowrap;flex-shrink:0
+}
+.tb-item:hover,.tb-item.lit{background:rgba(255,255,255,.18);color:#fff}
+.clock{font-size:8px;color:rgba(255,255,255,.6);margin-left:auto;white-space:nowrap;flex-shrink:0}
+</style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="nav-logo">
-                <a href="#home">Navya Shah</a>
-            </div>
-            <div class="nav-menu" id="nav-menu">
-                <a href="#home" class="nav-link">Home</a>
-                <a href="#about" class="nav-link">About</a>
-                <a href="#experience" class="nav-link">Experience</a>
-                <a href="#skills" class="nav-link">Skills</a>
-                <a href="#projects" class="nav-link">Projects and Research</a>
-                <a href="#contact" class="nav-link">Contact</a>
-            </div>
-            <div class="nav-toggle" id="nav-toggle">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </div>
-        </div>
-    </nav>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="hero-container">
-            <div class="hero-content">
-                <h1 class="hero-title">
-                    Hi, I'm <span class="highlight">Navya Shah</span>
-                </h1>
-                <h2 class="hero-subtitle">Solving Problems at the Intersection of Product, Finance, and Security</h2>
-                <p class="hero-description">
-                    I find the gaps - in products before they launch, in systems before they break, in processes before they slow someone down.
-                    <br> I work at the intersection of systems, data, and product, using Python, Java,SQL, and structured analysis to solve technical and operational problems. 
-                    I’m interested in building reliable systems that support high-impact environments.
-                </p>
-                <div class="hero-buttons">
-                    <a href="#projects" class="btn btn-primary">View My Work</a>
-                    <a href="#contact" class="btn btn-secondary">Get In Touch</a>
-                </div>
-                <div class="hero-social">
-                    <a href="https://github.com/navyashah" class="social-link" target="_blank"><i class="fab fa-github"></i></a>
-                    <a href="https://www.linkedin.com/in/navyashah6/" class="social-link" target="_blank"><i class="fab fa-linkedin"></i></a>
-                    <a href="https://medium.com/@navyashah6" class="social-link" target="_blank"><i class="fab fa-medium"></i></a>
-                </div>
-            </div>
-            <div class="hero-image">
-                <div class="profile-image">
-                    <img src="media/navya-shah-headshot.JPG" alt="Navya Shah">
-                </div>
-            </div>
-        </div>
-    </section>
+<!-- MENUBAR -->
+<div class="menubar">
+  <span class="brand">◆ NAVYA OS</span>
+  <span class="menu-item">FILE</span>
+  <span class="menu-item">VIEW</span>
+  <span class="menu-item">HELP</span>
+  <span class="menu-right">navyashah6@gmail.com</span>
+</div>
 
-    <!-- About Section -->
-    <section id="about" class="about">
-        <div class="container">
-            <h2 class="section-title">About Me</h2>
-            <div class="about-content">
-                <div class="about-text">
-                    <p>
-                        With a foundation in Economics and Data Science, I'm building my experience in cybersecurity by pursuing a Master's in Cybersecurity Engineering at USC, along with COMPTIA Security+ certification and Google's Cybersecurity Certificate. I'm passionate about data privacy and its far-reaching impact, particularly in protecting organizations that people trust every day. I deeply resonate with the ethical responsibility the role demands and believe it aligns with my values of ensuring equitable and trustworthy access to technology. With strong communication and programming skills, I want to support meaningful work and learn to stay resilient when facing an increasingly complex digital landscape.
-                    </p>
-                    <p>
-                        My journey into building my career is rooted in my interdisciplinary background. I earned my BA in Economics and Data Science with a minor in Business Law from the University of Southern California, where I cultivated a deep understanding of how data, markets, and regulation interact. My interest in tech had always been present, but it was through working on real-world problems in finance, healthcare, and public policy that I became drawn to protecting the very systems that power modern life.
-                    </p>
-                    <p>
-                        Throughout my undergraduate years, I worked on projects and internships that combined analytical thinking with purpose. At IREP Credit Capital, I supported rural entrepreneurship through micro-lending strategies. At Dalton Investments, I analyzed high-growth companies in emerging markets to inform investment decisions. And as a founding team member of Biokind Analytics, I partnered with healthcare nonprofits to streamline operations using data. In each of these roles, the increasing relevance of digital trust became impossible to ignore and I knew I wanted to be part of building modern systems from the ground up.
-                    </p>
-                    <p>
-                        Now, as I approach my full-time role, I bring a unique lens: one shaped by economics, grounded in ethics, and powered by a passion for using tech to drive social good.
-                    </p>
-                    <div class="about-stats">
-                        <div class="stat">
-                            <h3>5+</h3>
-                            <p>Personal Projects</p>
-                        </div>
-                        <div class="stat">
-                            <h3>100+</h3>
-                            <p>Security Controls Mapped</p>
-                        </div>
-                        <div class="stat">
-                            <h3>5</h3>
-                            <p>Internships Experience</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+<!-- DESKTOP -->
+<div class="desktop" id="desktop">
 
-    <!-- Experience Section -->
-    <section id="experience" class="experience">
-        <div class="container">
-            <h2 class="section-title">Experience</h2>
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-marker"></div>
-                    <div class="timeline-content">
-                        <h3>Cybersecurity Product Intern</h3>
-                        <h4>Spin.AI</h4>
-                        <span class="timeline-date">Sept 2025 - Present</span>
-                        <p>
-                            Evaluating SaaS applications for security features, identity access models, and architectural risks. 
-                            Mapping security controls to frameworks such as SOC 2 and NIST to improve compliance visibility.
-                        </p>
-                        <ul>
-                            <li><strong>What I learned:</strong> Developed expertise in SaaS security assessment, understanding how identity access models and architectural risks impact organizational security posture</li>
-                            <li><strong>What I learned:</strong> Gained deep knowledge of compliance frameworks (SOC 2, NIST) and how to map security controls to meet regulatory requirements</li>
-                            <li><strong>What I offer:</strong> Ability to evaluate and assess SaaS applications for security risks, translate technical findings into actionable recommendations, and contribute to product security roadmaps that enhance organizational compliance visibility</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-marker"></div>
-                    <div class="timeline-content">
-                        <h3>Information Security Intern</h3>
-                        <h4>Quantech Datascience</h4>
-                        <span class="timeline-date">Jun 2025 - Aug 2025</span>
-                        <p>
-                            Assisted with vulnerability scans and SIEM investigations, supporting incident detection and response. 
-                            Researched SaaS threat trends and attacker tools, producing intelligence briefs.
-                        </p>
-                        <ul>
-                            <li><strong>What I learned:</strong> Hands-on experience with vulnerability management and SIEM tools, understanding how to detect and investigate security incidents</li>
-                            <li><strong>What I learned:</strong> Developed research skills in threat intelligence, learning to analyze attacker methodologies and emerging SaaS security trends</li>
-                            <li><strong>What I offer:</strong> Practical skills in incident detection and response, threat research capabilities, and the ability to develop security policies and align IAM practices with organizational needs</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-marker"></div>
-                    <div class="timeline-content">
-                        <h3>Financial Analyst Intern</h3>
-                        <h4>IREP Credit Capital</h4>
-                        <span class="timeline-date">May 2024 - Jul 2024</span>
-                        <p>
-                            Designed a loan default tracker analyzing 1,000+ accounts, improving accuracy of risk monitoring by 20% 
-                            using behavioral buckets. Synthesized market data into insights for portfolio strategy.
-                        </p>
-                        <ul>
-                            <li><strong>What I learned:</strong> Developed analytical skills in risk assessment and data-driven decision making, understanding how to identify patterns and improve monitoring accuracy</li>
-                            <li><strong>What I learned:</strong> Gained experience in synthesizing complex data into actionable insights that inform strategic decisions</li>
-                            <li><strong>What I offer:</strong> Strong analytical and risk assessment capabilities, ability to work with large datasets, and translate data insights into strategic recommendations—skills directly applicable to threat analysis and security risk management</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-marker"></div>
-                    <div class="timeline-content">
-                        <h3>Teaching Assistant - Object-Oriented Programming</h3>
-                        <h4>University of Southern California</h4>
-                        <span class="timeline-date">Aug 2023 - May 2025</span>
-                        <p>
-                            Supported 100+ students through help sessions and assignment reviews, clarifying coding concepts. 
-                            Collaborated with professor to create grading rubrics that improved course feedback by 15%.
-                        </p>
-                        <ul>
-                            <li><strong>What I learned:</strong> Developed strong communication and teaching skills, learning to explain complex technical concepts clearly and adapt explanations to different learning styles</li>
-                            <li><strong>What I learned:</strong> Gained experience in creating structured frameworks (grading rubrics) that improve processes and outcomes</li>
-                            <li><strong>What I offer:</strong> Excellent communication skills for collaborating with security teams, ability to document processes and create clear frameworks, and experience in continuous improvement—valuable for security awareness training, documentation, and team collaboration</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+  <div class="watermark">
+    <div class="wm-line">I SEEK PROBLEMS.</div>
+    <div class="wm-line">I BUILD SOLUTIONS.</div>
+  </div>
 
-    <!-- Skills Section -->
-    <section id="skills" class="skills">
-        <div class="container">
-            <h2 class="section-title">Skills & Technologies</h2>
-            <div class="skills-grid">
-                <div class="skill-category">
-                    <h3>Technical Skills</h3>
-                    <div class="skill-items">
-                        <div class="skill-item">
-                            <span>Python</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" data-width="85%"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <span>Java</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" data-width="80%"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <span>SQL</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" data-width="90%"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <span>Linux/Unix</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" data-width="85%"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="skill-category">
-                    <h3>Security & Compliance</h3>
-                    <div class="skill-items">
-                        <div class="skill-item">
-                            <span>IAM & Access Reviews</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" data-width="90%"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <span>Vulnerability Scanning</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" data-width="85%"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <span>SIEM (Splunk)</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" data-width="80%"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <span>SOC 2 & NIST</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" data-width="85%"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="skill-category">
-                    <h3>Tools & Technologies</h3>
-                    <div class="skill-items">
-                        <div class="skill-item">
-                            <span>AWS</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" data-width="75%"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <span>Active Directory</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" data-width="80%"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <span>Tableau</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" data-width="85%"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <span>Wireshark</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" data-width="70%"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+  <div class="icons">
+    <div class="icon" ondblclick="openWin('about')"><div class="icon-box">🙋</div><div class="icon-label">ABOUT.exe</div></div>
+    <div class="icon" ondblclick="openWin('exp')"><div class="icon-box">💼</div><div class="icon-label">WORK.exe</div></div>
+    <div class="icon" ondblclick="openWin('edu')"><div class="icon-box">🎓</div><div class="icon-label">EDU.exe</div></div>
+    <div class="icon" ondblclick="openWin('proj')"><div class="icon-box">🔧</div><div class="icon-label">BUILDS.exe</div></div>
+    <div class="icon" ondblclick="openWin('skills')"><div class="icon-box">⚡</div><div class="icon-label">SKILLS.exe</div></div>
+    <div class="icon" ondblclick="openWin('contact')"><div class="icon-box">📬</div><div class="icon-label">HIRE.exe</div></div>
+  </div>
 
-    <!-- Projects Section -->
-    <section id="projects" class="projects">
-        <div class="container">
-            <h2 class="section-title">Projects and Research</h2>
-            <div class="projects-carousel">
-                <button class="projects-arrow projects-arrow-left" aria-label="Previous projects">
-                    <i class="fas fa-chevron-left"></i>
-                </button>
-                <div class="projects-viewport">
-                    <div class="projects-track">
-                        <div class="project-card">
-                            <div class="project-content">
-                                <h3>Continuous Compliance Engine (SOC 2 Controls-as-Code)</h3>
-                                <p>
-                                    Built an internal compliance monitoring web app that evaluates SOC 2 controls (CC6.1, CC7.2, CC8.1) and PCI DSS controls (PCI.DSS.1.1, PCI.DSS.1.2, PCI.DSS.1.3) using mocked system evidence, stores immutable audit-ready snapshots + evaluations in PostgreSQL, and surfaces compliance status through a clickable dashboard with control-level drilldowns and alerts.
-                                </p>
-                                <div class="project-tech">
-                                    <span>SOC 2 Automation</span>
-                                    <span>FastAPI</span>
-                                    <span>PostgreSQL</span>
-                                </div>
-                                <a href="https://github.com/navyashah/cce-project" target="_blank" class="btn btn-primary">View on GitHub</a>
-                            </div>
-                        </div>
-                        <div class="project-card">
-                            <div class="project-content">
-                                <h3>Commons — AI-Powered Student Networking Platform</h3>
-                                <p>
-                                    A campus-exclusive web app built at AthenaHacks 2025 that connects students based on shared courses, interests, and mentorship preferences. Used the Gemini API to power AI-driven peer recommendations beyond basic course matching. Contributed to full-stack development across the React frontend and Node.js/Express backend, and helped shape the UI and user flows in Figma. Features include .edu email verification, real-time messaging, advanced filtering, and opt-in peer mentorship matching. Awarded Best Hack in Tech at AthenaHacks 2025.
-                                </p>
-                                <div class="project-tech">
-                                    <span>React</span>
-                                    <span>Node.js</span>
-                                    <span>MongoDB</span>
-                                    <span>Gemini API</span>
-                                    <span>Figma</span>
-                                    <span>Tailwind CSS</span>
-                                </div>
-                                <a href="https://devpost.com/software/commons-jay51o" target="_blank" class="btn btn-primary">View Demo</a>
-                            </div>
-                        </div>
-                        <div class="project-card">
-                            <div class="project-content">
-                                <h3>Policy Project</h3>
-                                <p>
-                                    This project focuses on the design and evaluation of security policies for organizations 
-                                    handling electronic Protected Health Information (ePHI). The work applies industry standards 
-                                    such as HIPAA and the NIST 800-66 framework to analyze access control, encryption, data segregation, 
-                                    logging, and recovery mechanisms across on-prem and cloud environments. Using a real-world healthcare data 
-                                    workflow, the project translates regulatory requirements into enforceable technical controls, demonstrating 
-                                    how security policy design directly impacts confidentiality, integrity, and availability in sensitive systems.
-                                </p>
-                                <div class="project-tech">
-                                    <span>HIPAA Compliance</span>
-                                    <span>Access Control</span>
-                                    <span>NIST Framework</span>
-                                    <span>ePHI Security</span>
-                                </div>
-                                <a href="media/DSCI 519 Semester Project - Navya Shah.pdf" download class="btn btn-primary">Download PDF</a>
-                            </div>
-                        </div>
-                        <div class="project-card">
-                            <div class="project-content">
-                                <h3>Research Paper: Decentralized Key Management</h3>
-                                <p>
-                                    This research paper explores decentralized key management systems 
-                                    and how they challenge traditional Public Key Infrastructure (PKI) models. 
-                                    The paper analyzes how blockchain-based frameworks, decentralized 
-                                    identifiers (DIDs), and threshold cryptography redistribute trust away from 
-                                    centralized authorities and toward cryptographic protocols. Through architectural 
-                                    analysis and real-world case studies, the work evaluates the security benefits, scalability, 
-                                    and trade-offs of decentralized key management.
-                                </p>
-                                <div class="project-tech">
-                                    <span>Decentralized Key Management</span>
-                                    <span>Blockchain Security</span>
-                                    <span>Cryptography</span>
-                                </div>
-                                <a href="media/Navya Shah - Research paper CSCI530.pdf" download class="btn btn-primary">Download PDF</a>
-                            </div>
-                        </div>
-                        <div class="project-card">
-                            <div class="project-content">
-                                <h3>Research Paper: Biometric Authentication</h3>
-                                <p>
-                                    This paper examines biometric authentication systems through
-                                    the lens of privacy, security failures, and global regulation. 
-                                    It analyzes biometric error models, data integrity risks, and 
-                                    the consequences of irrevocable identity compromise, while comparing 
-                                    regulatory approaches across the United States, Europe, India, and China. 
-                                    highlights the tension between convenience, surveillance, and user privacy, 
-                                    and emphasizes the need for stronger governance as biometric technologies 
-                                    become increasingly embedded in everyday systems.
-                                </p>
-                                <div class="project-tech">
-                                    <span>Biometric Authentication</span>
-                                    <span>Privacy</span>
-                                    <span>Security Analysis</span>
-                                </div>
-                                <a href="media/Research Paper.pdf" download class="btn btn-primary">Download PDF</a>
-                            </div>
-                        </div>
-                        <div class="project-card">
-                            <div class="project-content">
-                                <h3>Cybersecurity Consulting Case Challenge</h3>
-                                <p>
-                                    This challenge simulated a cybersecurity consulting engagement, requiring the assessment of organizational 
-                                    security risks, threat exposure, and control gaps under real-world constraints. The work focused on translating 
-                                    technical findings into business impact, prioritizing risks, and proposing  mitigation strategies aligned 
-                                    with operational and regulatory considerations. The final deliverable emphasized structured analysis and clear recommendations tailored to for the client.
-                                </p>
-                                <div class="project-tech">
-                                    <span>Cybersecurity Consulting</span>
-                                    <span>Risk Assessment</span>
-                                    <span>Threat Modeling</span>
-                                </div>
-                                <a href="media/Company Assignment Challenge.xlsx" download class="btn btn-primary">Download File</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <button class="projects-arrow projects-arrow-right" aria-label="Next projects">
-                    <i class="fas fa-chevron-right"></i>
-                </button>
-            </div>
-        </div>
-    </section>
+  <!-- ── ABOUT ── -->
+  <div class="window" id="win-about" style="width:460px">
+    <div class="titlebar" data-win="about">
+      <span class="tb-title">ABOUT.exe — Navya Shah</span>
+      <div class="tb-btns">
+        <div class="tb-btn" onclick="minWin('about')" title="Minimize">—</div>
+        <div class="tb-btn" onclick="closeWin('about')" title="Close">✕</div>
+      </div>
+    </div>
+    <div class="win-body">
+      <div class="win-section">WHO I AM</div>
+      <p class="wp">I find gaps — in products before they launch, in systems before they break, in processes before they slow someone down.</p>
+      <p class="wp">Started in finance. Realized I wanted to build the systems I was analyzing, not just model them. A blockchain class flipped the switch — got curious about why money movement is still so fragmented when better infrastructure exists. That pulled me toward cybersecurity, then product.</p>
+      <p class="wp">USC grad. Economics + Data Science BA, Cybersecurity Engineering MS. Currently at Spin.AI working on product. Moving to NYC in August.</p>
+      <div class="stat-row">
+        <div class="stat-box"><span class="stat-num">5+</span><span class="stat-label">Projects</span></div>
+        <div class="stat-box"><span class="stat-num">100+</span><span class="stat-label">Controls Mapped</span></div>
+        <div class="stat-box"><span class="stat-num">5</span><span class="stat-label">Internships</span></div>
+      </div>
+      <div style="margin-top:12px">
+        <span class="tag">Product</span><span class="tag">Operations</span><span class="tag">Builder</span><span class="tag green">USC '26</span><span class="tag navy">LA → NYC</span>
+      </div>
+    </div>
+  </div>
 
-    <!-- Contact Section -->
-    <section id="contact" class="contact">
-        <div class="container">
-            <h2 class="section-title">Get In Touch</h2>
-            <div class="contact-content">
-                <div class="contact-info">
-                    <h3>Let's work together!</h3>
-                    <p>
-                        I'm always interested in new opportunities and exciting projects. 
-                        Whether you have a question or just want to say hi, I'll try my best to get back to you!
-                    </p>
-                    <div class="contact-details">
-                        <div class="contact-item">
-                            <i class="fas fa-envelope"></i>
-                            <span>navyashah6@gmail.com</span>
-                        </div>
-                        <div class="contact-item">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span>Los Angeles, CA 90007</span>
-                        </div>
-                        <div class="contact-item">
-                            <i class="fas fa-graduation-cap"></i>
-                            <span>University of Southern California</span>
-                        </div>
-                    </div>
-                    <div class="contact-social">
-                        <a href="https://github.com/navyashah" class="social-link" target="_blank"><i class="fab fa-github"></i></a>
-                        <a href="https://www.linkedin.com/in/navyashah6/" class="social-link" target="_blank"><i class="fab fa-linkedin"></i></a>
-                        <a href="https://medium.com/@navyashah6" class="social-link" target="_blank"><i class="fab fa-medium"></i></a>
-                    </div>
-                </div>
-                <div class="contact-form-alternative">
-                    <h3>Get In Touch</h3>
-                    <p>Click the button below to send me a message through Google Forms.</p>
-                    <a href="https://forms.gle/two4oU43NL6V27tHA" target="_blank" class="btn btn-primary">Send Message</a>
-                    <p class="form-note">This will open a secure Google Form in a new tab where you can send me your message.</p>
-                </div>
-            </div>
+  <!-- ── WORK ── -->
+  <div class="window" id="win-exp" style="width:490px">
+    <div class="titlebar" data-win="exp">
+      <span class="tb-title">WORK.exe — Experience</span>
+      <div class="tb-btns">
+        <div class="tb-btn" onclick="minWin('exp')">—</div>
+        <div class="tb-btn" onclick="closeWin('exp')">✕</div>
+      </div>
+    </div>
+    <div class="win-body">
+      <div class="win-section">WHERE I'VE BEEN</div>
+      <div class="job">
+        <div class="job-co">Spin.AI</div>
+        <div class="job-role">Product Management Intern · Sept 2025 – Present</div>
+        <div class="job-body">
+          <p class="bullet">Analyzed 20+ SaaS products to identify feature gaps and built 100+ security control mappings.</p>
+          <p class="bullet">Defined requirements for a Value-Added Partner feature: assessed how partner configs interact with platform-level settings, mapped edge cases, wrote a BRD.</p>
+          <p class="bullet">Identified that solutions engineers had to fully log out to switch client accounts — nobody had flagged it. Designed the UX fix and validated with customer success before scoping.</p>
+          <p class="bullet">Collaborated with engineering on acceptance criteria, edge cases, and sandbox integration.</p>
         </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <p>&copy; 2025 Navya Shah. All rights reserved.</p>
-            </div>
+      </div>
+      <hr class="divider">
+      <div class="job">
+        <div class="job-co">Quantech Datascience</div>
+        <div class="job-role">Operations Intern · Jun – Aug 2025</div>
+        <div class="job-body">
+          <p class="bullet">Evaluated security controls across database, API layer, file storage, and user management for Ritetax — a tax compliance product handling sensitive financial data for chartered accountant firms.</p>
+          <p class="bullet">Found client data separation was only enforced at the UI layer. Tested, documented the gap reproducibly, escalated to engineering — fixed before launch.</p>
+          <p class="bullet">Detected through log analysis that the OCR pipeline silently returned incomplete data. Recommended a post-extraction completeness check now in production.</p>
         </div>
-    </footer>
+      </div>
+      <hr class="divider">
+      <div class="job">
+        <div class="job-co">IREP Credit Capital</div>
+        <div class="job-role">Financial Analyst Intern · May – Jul 2024</div>
+        <div class="job-body">
+          <p class="bullet">Built SQL loan default tracker analyzing 1,000+ accounts, improving risk monitoring accuracy by 20% using behavioral buckets to identify risk patterns.</p>
+          <p class="bullet">Synthesized market data into insights that guided portfolio strategy and risk modeling discussions.</p>
+        </div>
+      </div>
+      <hr class="divider">
+      <div class="job">
+        <div class="job-co">University of Southern California</div>
+        <div class="job-role">Teaching Assistant, Object-Oriented Programming · Aug 2023 – May 2025</div>
+        <div class="job-body">
+          <p class="bullet">Supported 100+ students through help sessions and assignment reviews.</p>
+          <p class="bullet">Debugged student Java OOP code in real time, identifying logic errors and edge cases.</p>
+          <p class="bullet">Restructured my teaching approach after direct feedback — learned to meet students at the source of confusion rather than re-explaining the same way louder.</p>
+        </div>
+      </div>
+    </div>
+  </div>
 
-    <script src="script.js"></script>
+  <!-- ── EDUCATION ── -->
+  <div class="window" id="win-edu" style="width:440px">
+    <div class="titlebar" data-win="edu">
+      <span class="tb-title">EDU.exe — Education</span>
+      <div class="tb-btns">
+        <div class="tb-btn" onclick="minWin('edu')">—</div>
+        <div class="tb-btn" onclick="closeWin('edu')">✕</div>
+      </div>
+    </div>
+    <div class="win-body">
+      <div class="win-section">UNIVERSITY OF SOUTHERN CALIFORNIA</div>
+      <div class="job">
+        <div class="job-co">MS · Cyber Security Engineering</div>
+        <div class="job-role">GPA: 3.83 · May 2026</div>
+        <div class="job-body">
+          <p class="bullet">Coursework: Network Security, Secure Software Design, Privacy & Policy, Applied Cryptography</p>
+          <p class="bullet">CompTIA Security+ (in progress) · Google Cybersecurity Professional Certificate</p>
+        </div>
+      </div>
+      <hr class="divider">
+      <div class="job">
+        <div class="job-co">BA · Economics and Data Science</div>
+        <div class="job-role">Cum Laude · Minor: Business Law · May 2025</div>
+        <div class="job-body">
+          <p class="bullet">Graduated with honors. Coursework in econometrics, behavioral economics, machine learning, and data systems.</p>
+          <p class="bullet">Senior Advisor, USC Economics Association — led exec board, grew membership and operations.</p>
+        </div>
+      </div>
+      <hr class="divider">
+      <p style="color:#888;font-size:16px;font-style:italic">"The BA taught me how markets and systems interact.<br>The MS taught me how they break."</p>
+    </div>
+  </div>
+
+  <!-- ── PROJECTS ── -->
+  <div class="window" id="win-proj" style="width:510px">
+    <div class="titlebar" data-win="proj">
+      <span class="tb-title">BUILDS.exe — Projects</span>
+      <div class="tb-btns">
+        <div class="tb-btn" onclick="minWin('proj')">—</div>
+        <div class="tb-btn" onclick="closeWin('proj')">✕</div>
+      </div>
+    </div>
+    <div class="win-body">
+      <div class="win-section">WHAT I'VE BUILT</div>
+
+      <div class="job">
+        <div class="proj-title">Local <span style="font-size:12px;color:#888;font-family:'Press Start 2P',monospace">IN PROGRESS</span></div>
+        <div class="job-role">Consumer Food Recommendation App</div>
+        <p class="job-body wp">Building a RAG pipeline using pgvector and Supabase to surface hyper-local restaurant recommendations from unstructured data across reviews, ratings, and creator content. React PWA frontend with intent classification and conversation layer powered by Claude API.</p>
+        <div class="proj-tags"><span class="tag">RAG</span><span class="tag">pgvector</span><span class="tag">Supabase</span><span class="tag">React PWA</span><span class="tag">Claude API</span></div>
+      </div>
+      <hr class="divider">
+
+      <div class="job">
+        <div class="proj-title">LUCERNA</div>
+        <div class="job-role">Hacking for Defense — US Air Force</div>
+        <p class="job-body wp">Led problem definition for an Air Force contracting visibility system. Synthesized insights across stakeholder interviews and defined system architecture for an LLM-powered Text2SQL pipeline — lets non-technical users query fragmented contract data in natural language.</p>
+        <div class="proj-tags"><span class="tag">LLM</span><span class="tag">Text2SQL</span><span class="tag">Prompt Engineering</span><span class="tag">Air Force</span></div>
+      </div>
+      <hr class="divider">
+
+      <div class="job">
+        <div class="proj-title">Commons <span class="proj-award">🏆 BEST HACK</span></div>
+        <div class="job-role">AthenaHacks 2025 · AI-Powered Student Networking</div>
+        <p class="job-body wp">Campus-exclusive web app connecting students based on shared courses, interests, and mentorship preferences. Used Gemini API for AI-driven peer recommendations. Full-stack: React frontend, Node.js/Express backend, MongoDB. Awarded Best Hack in Tech.</p>
+        <div class="proj-tags"><span class="tag">React</span><span class="tag">Node.js</span><span class="tag">MongoDB</span><span class="tag">Gemini API</span><span class="tag">Figma</span></div>
+        <div style="margin-top:6px"><span class="proj-link" onclick="window.open('https://devpost.com/software/commons-jay51o','_blank')">↗ View on Devpost</span></div>
+      </div>
+      <hr class="divider">
+
+      <div class="job">
+        <div class="proj-title">Continuous Compliance Engine</div>
+        <div class="job-role">SOC 2 Controls-as-Code · Security Automation</div>
+        <p class="job-body wp">Compliance monitoring web app that evaluates SOC 2 and PCI DSS controls against mocked system evidence, stores immutable audit-ready snapshots in PostgreSQL, and surfaces compliance status through a dashboard with control-level drilldowns and alerts.</p>
+        <div class="proj-tags"><span class="tag">SOC 2</span><span class="tag">FastAPI</span><span class="tag">PostgreSQL</span><span class="tag">Dashboard</span></div>
+        <div style="margin-top:6px"><span class="proj-link" onclick="window.open('https://github.com/navyashah/cce-project','_blank')">↗ View on GitHub</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SKILLS ── -->
+  <div class="window" id="win-skills" style="width:460px">
+    <div class="titlebar" data-win="skills">
+      <span class="tb-title">SKILLS.exe</span>
+      <div class="tb-btns">
+        <div class="tb-btn" onclick="minWin('skills')">—</div>
+        <div class="tb-btn" onclick="closeWin('skills')">✕</div>
+      </div>
+    </div>
+    <div class="win-body">
+      <div class="win-section">TOOLKIT</div>
+      <div class="skills-group">
+        <div class="skills-label">TECHNICAL</div>
+        <span class="tag">Python</span><span class="tag">Java</span><span class="tag">SQL</span><span class="tag">JavaScript</span><span class="tag">React</span><span class="tag">Node.js</span><span class="tag">Postgres</span><span class="tag">MongoDB</span><span class="tag">AWS</span><span class="tag">Linux</span><span class="tag">REST APIs</span>
+      </div>
+      <div class="skills-group">
+        <div class="skills-label">PRODUCT + OPS</div>
+        <span class="tag">Feature Definition</span><span class="tag">BRD Writing</span><span class="tag">Workflow Design</span><span class="tag">Cross-Functional Collab</span><span class="tag">Market Research</span><span class="tag">Process Improvement</span>
+      </div>
+      <div class="skills-group">
+        <div class="skills-label">SECURITY</div>
+        <span class="tag navy">SOC 2</span><span class="tag navy">GDPR</span><span class="tag navy">Splunk</span><span class="tag navy">Log Analysis</span><span class="tag navy">Vulnerability Assessment</span><span class="tag navy">Threat Modeling</span><span class="tag navy">Wireshark</span>
+      </div>
+      <div class="skills-group">
+        <div class="skills-label">AI + TOOLS</div>
+        <span class="tag green">Cursor</span><span class="tag green">Claude Code</span><span class="tag green">Zapier</span><span class="tag green">Figma</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── CONTACT ── -->
+  <div class="window" id="win-contact" style="width:400px">
+    <div class="titlebar" data-win="contact">
+      <span class="tb-title">HIRE.exe — Get In Touch</span>
+      <div class="tb-btns">
+        <div class="tb-btn" onclick="minWin('contact')">—</div>
+        <div class="tb-btn" onclick="closeWin('contact')">✕</div>
+      </div>
+    </div>
+    <div class="win-body">
+      <div class="win-section">LET'S TALK</div>
+      <p class="wp">I'm always open to new opportunities and interesting problems. Reach out — I'll get back to you.</p>
+      <div style="margin-top:14px">
+        <div class="contact-link"><span class="contact-icon">📧</span><span class="contact-val" onclick="window.open('mailto:navyashah6@gmail.com')">navyashah6@gmail.com</span></div>
+        <div class="contact-link"><span class="contact-icon">💼</span><span class="contact-val" onclick="window.open('https://www.linkedin.com/in/navyashah6/','_blank')">linkedin.com/in/navyashah6</span></div>
+        <div class="contact-link"><span class="contact-icon">🔧</span><span class="contact-val" onclick="window.open('https://github.com/navyashah','_blank')">github.com/navyashah</span></div>
+        <div class="contact-link"><span class="contact-icon">✍️</span><span class="contact-val" onclick="window.open('https://medium.com/@navyashah6','_blank')">medium.com/@navyashah6</span></div>
+      </div>
+      <p style="margin-top:18px;color:#888;font-size:16px">Available June 2026.<br>Moving to NYC August 2026.</p>
+    </div>
+  </div>
+
+</div><!-- end desktop -->
+
+<!-- TASKBAR -->
+<div class="taskbar">
+  <div class="start-btn" onclick="openAll()">◆ START</div>
+  <div class="tb-sep"></div>
+  <div class="tb-items" id="tb-items"></div>
+  <div class="clock" id="clock">00:00</div>
+</div>
+
+<script>
+if (/Mobi|Android|iPhone|iPad/i.test(navigator.userAgent)) {
+  window.location.replace('/mobile.html');
+}
+
+// ── STATE ────────────────────────────
+let zTop = 100;
+const openMap = {};
+let openCount = 0;
+const WIN_LABELS = {about:'ABOUT',exp:'WORK',edu:'EDU',proj:'BUILDS',skills:'SKILLS',contact:'HIRE'};
+const CASCADE = [
+  {t:44,l:106},{t:62,l:160},{t:52,l:200},{t:74,l:130},{t:90,l:172},{t:66,l:220}
+];
+
+// ── WINDOW MANAGEMENT ────────────────
+function openWin(id) {
+  const w = document.getElementById('win-' + id);
+  if (!w) return;
+  if (!openMap[id]) {
+    const p = CASCADE[openCount % CASCADE.length];
+    w.style.top  = (p.t + openCount * 16) + 'px';
+    w.style.left = (p.l + openCount * 24) + 'px';
+    openCount++;
+    openMap[id] = true;
+    w.classList.add('open');
+    w.classList.remove('minimized');
+    updateTaskbar();
+  } else {
+    w.classList.remove('minimized');
+  }
+  focusWin(id);
+}
+
+function closeWin(id) {
+  const w = document.getElementById('win-' + id);
+  if (w) { w.classList.remove('open','focused','minimized'); delete openMap[id]; updateTaskbar(); }
+}
+
+function minWin(id) {
+  const w = document.getElementById('win-' + id);
+  if (w) w.classList.toggle('minimized');
+}
+
+function focusWin(id) {
+  document.querySelectorAll('.window').forEach(w => w.classList.remove('focused'));
+  const w = document.getElementById('win-' + id);
+  if (w) { w.style.zIndex = ++zTop; w.classList.add('focused'); }
+  // highlight taskbar item
+  document.querySelectorAll('.tb-item').forEach(i => i.classList.remove('lit'));
+  const btn = document.getElementById('tb-' + id);
+  if (btn) btn.classList.add('lit');
+}
+
+function openAll() {
+  ['about','exp','edu','proj','skills','contact'].forEach(id => openWin(id));
+}
+
+function updateTaskbar() {
+  const c = document.getElementById('tb-items');
+  c.innerHTML = '';
+  Object.keys(openMap).forEach(id => {
+    const btn = document.createElement('div');
+    btn.className = 'tb-item';
+    btn.id = 'tb-' + id;
+    btn.textContent = WIN_LABELS[id] || id.toUpperCase();
+    btn.onclick = () => { openWin(id); focusWin(id); };
+    c.appendChild(btn);
+  });
+}
+
+// Click window to focus
+document.querySelectorAll('.window').forEach(w => {
+  w.addEventListener('mousedown', () => {
+    const id = w.id.replace('win-','');
+    focusWin(id);
+  });
+});
+
+// ── DRAG ─────────────────────────────
+(function() {
+  let dragging = null, ox = 0, oy = 0;
+
+  document.addEventListener('mousedown', e => {
+    const tb = e.target.closest('.titlebar');
+    if (!tb) return;
+    if (e.target.classList.contains('tb-btn')) return;
+    const win = tb.closest('.window');
+    if (!win) return;
+    dragging = win;
+    const rect = win.getBoundingClientRect();
+    ox = e.clientX - rect.left;
+    oy = e.clientY - rect.top;
+    document.body.classList.add('dragging');
+    e.preventDefault();
+  });
+
+  document.addEventListener('mousemove', e => {
+    if (!dragging) return;
+    const deskRect = document.getElementById('desktop').getBoundingClientRect();
+    let nx = e.clientX - deskRect.left - ox;
+    let ny = e.clientY - deskRect.top  - oy;
+    // Clamp inside desktop
+    nx = Math.max(0, Math.min(nx, deskRect.width  - dragging.offsetWidth));
+    ny = Math.max(0, Math.min(ny, deskRect.height - dragging.offsetHeight + 26));
+    dragging.style.left = nx + 'px';
+    dragging.style.top  = ny + 'px';
+  });
+
+  document.addEventListener('mouseup', () => {
+    dragging = null;
+    document.body.classList.remove('dragging');
+  });
+})();
+
+// ── CLOCK ────────────────────────────
+function tick() {
+  document.getElementById('clock').textContent =
+    new Date().toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
+}
+setInterval(tick, 1000); tick();
+
+// ── BOOT ────────────────────────────
+setTimeout(() => openWin('about'), 200);
+setTimeout(() => openWin('exp'),   500);
+</script>
 </body>
 </html>
