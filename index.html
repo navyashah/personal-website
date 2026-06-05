@@ -6,6 +6,12 @@
 <title>NAVYA OS — navyashah.dev</title>
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
 <style>
+.resize-handle{
+  position:absolute;bottom:2px;right:2px;
+  width:14px;height:14px;cursor:se-resize;
+  background:repeating-linear-gradient(-45deg,#1a1a1a,#1a1a1a 1px,transparent 1px,transparent 3px);
+  z-index:10;
+}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html,body{height:100%;overflow:hidden;font-family:'Press Start 2P',monospace;background:#1a2e1a}
 body{background-image:radial-gradient(circle,rgba(255,255,255,.04) 1px,transparent 1px);background-size:22px 22px;user-select:none}
@@ -667,13 +673,13 @@ const ALL_IDS=['about','exp','edu','proj','skills','contact'];
 
 // Every window has one permanent home position — no cascade
 const HOME_POS={
-  about:    {top:30,  left:108},
-  exp:      {top:55,  left:570},
-  edu:      {top:38,  left:960},
-  proj:     {top:310, left:108},
-  skills:   {top:335, left:570},
+  about:    {top:30,  left:108, w:'480px'},
+  exp:      {top:55,  left:570, w:'520px'},
+  edu:      {top:38,  left:960, w:'470px'},
+  proj:     {top:310, left:108, w:'540px'},
+  skills:   {top:335, left:570, w:'480px'},
   contact:  {top:318, left:1040, w:'300px'},
-  research: {top:160, left:620}
+  research: {top:160, left:620, w:'500px'}
 };
 
 function toggleMenu(name){
@@ -713,7 +719,8 @@ function closeWin(id){
   const w=document.getElementById('win-'+id);
   if(w){
     w.classList.remove('open','focused','minimized');
-    w.style.width='';
+    const p=HOME_POS[id];
+    w.style.width=(p&&p.w)?p.w:'';
     const body=w.querySelector('.win-body');
     if(body) body.style.maxHeight='';
     delete openMap[id];updateTaskbar();
@@ -833,6 +840,25 @@ document.addEventListener('mousedown', e => {
   });
 });
 
+// Resize handles
+document.querySelectorAll('.window').forEach(win=>{
+  const h=document.createElement('div');
+  h.className='resize-handle';
+  win.appendChild(h);
+  let on=false,sx,sy,sw,sh;
+  h.addEventListener('mousedown',e=>{
+    on=true;sx=e.clientX;sy=e.clientY;
+    sw=win.offsetWidth;sh=win.offsetHeight;
+    e.preventDefault();e.stopPropagation();
+  });
+  document.addEventListener('mousemove',e=>{
+    if(!on) return;
+    win.style.width=Math.max(280,sw+e.clientX-sx)+'px';
+    const body=win.querySelector('.win-body');
+    if(body) body.style.maxHeight=Math.max(60,sh+e.clientY-sy-40)+'px';
+  });
+  document.addEventListener('mouseup',()=>{on=false});
+});
 </script>
 </body>
 </html>
