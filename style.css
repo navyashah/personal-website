@@ -141,6 +141,39 @@ main::after {
 .prose p {
   font-size: 0.95rem;
   margin-bottom: 1.25rem;
+  transition: color 0.15s ease;
+}
+
+.prose p:hover {
+  color: #C4622D;
+}
+
+/* --- Contact --- */
+
+.contact-tagline {
+  font-size: 0.95rem;
+  margin-bottom: 1.75rem;
+}
+
+.contact-list {
+  list-style: disc;
+  padding-left: 1.1rem;
+  margin: 0;
+}
+
+.contact-list li {
+  margin-bottom: 0.6rem;
+}
+
+.contact-list a {
+  color: #C4622D;
+  text-decoration: none;
+  font-size: 0.95rem;
+}
+
+.contact-list a:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
 .external-links {
