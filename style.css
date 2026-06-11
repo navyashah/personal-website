@@ -141,11 +141,49 @@ main::after {
 .prose p {
   font-size: 0.95rem;
   margin-bottom: 1.25rem;
-  transition: color 0.15s ease;
 }
 
-.prose p:hover {
+.word {
+  transition: color 0.9s ease;
+}
+
+.word:hover {
   color: #C4622D;
+  cursor: default;
+  transition: color 0.05s ease;
+}
+
+/* --- In Progress tooltip --- */
+
+.in-progress-wrap {
+  position: relative;
+  display: inline-block;
+  cursor: default;
+}
+
+.in-progress-wrap::after {
+  content: '⏱  IN PROGRESS...';
+  position: absolute;
+  bottom: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%) scale(0.96);
+  background: #1A1A1A;
+  color: #FAFAF8;
+  padding: 9px 18px;
+  border-radius: 100px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+  z-index: 10;
+}
+
+.in-progress-wrap:hover::after {
+  opacity: 1;
+  transform: translateX(-50%) scale(1);
 }
 
 /* --- Contact --- */

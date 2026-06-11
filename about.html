@@ -47,6 +47,13 @@
       <p>→ <a href="https://github.com/navyashah" target="_blank" rel="noopener">github.com/navyashah</a></p>
     </div>
   </main>
+  <script>
+    document.querySelectorAll('.prose p').forEach(function(p) {
+      p.innerHTML = p.textContent.split(' ').map(function(w) {
+        return '<span class="word">' + w + '</span>';
+      }).join(' ');
+    });
+  </script>
 
   <footer>
     <p>navyashah.me · 2026</p>
