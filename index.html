@@ -3,47 +3,859 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Navya Shah — product and ops, USC econ + data science, MS cybersecurity. Building Local. Based in LA, looking for SF.">
-  <meta property="og:title" content="Navya Shah">
-  <meta property="og:description" content="Product and ops. USC econ + data science, MS cybersecurity. Building Local, an AI food rec app. Currently at Spin.AI.">
+  <meta name="description" content="Navya Shah — product and ops. Building Local. Currently at Spin.AI.">
   <title>Navya Shah</title>
-  <link rel="icon" href="/media/favicon.png" type="image/png">
+  <link rel="icon" type="image/png" href="media/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=JetBrains+Mono&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+  <script>
+    if(/Mobi|Android|iPhone|iPad/i.test(navigator.userAgent)){
+      window.location.replace('mobile.html');
+    }
+  </script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #FAF6EF;
+      color: #1A1A1A;
+      font-family: 'VT323', monospace;
+      overflow: hidden;
+      height: 100vh;
+      width: 100vw;
+    }
+
+    /* ── Menubar ── */
+    .menubar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 26px;
+      background: #FFF8F0;
+      border-bottom: 1px solid #EDE5D8;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 12px;
+      z-index: 100;
+    }
+    .menubar-brand {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 8px;
+      color: #FF6B2B;
+      letter-spacing: 0.04em;
+    }
+    .menubar-right {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-family: 'VT323', monospace;
+      font-size: 15px;
+      color: #1A1A1A;
+    }
+
+    /* ── Taskbar ── */
+    .taskbar {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      height: 24px;
+      background: #FFF8F0;
+      border-top: 1px solid #EDE5D8;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 12px;
+      z-index: 100;
+    }
+    .taskbar-left, .taskbar-right {
+      font-family: 'VT323', monospace;
+      font-size: 13px;
+      color: #888888;
+    }
+
+    /* ── Sidebar ── */
+    .sidebar {
+      position: fixed;
+      top: 26px; left: 0; bottom: 24px;
+      width: 72px;
+      background: #FFF8F0;
+      border-right: 1px solid #EDE5D8;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 10px;
+      gap: 3px;
+      z-index: 90;
+    }
+    .sidebar-icon {
+      width: 56px;
+      padding: 7px 4px 5px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      cursor: pointer;
+      border: 1px solid transparent;
+      border-radius: 4px;
+      user-select: none;
+      transition: background 0.1s;
+    }
+    .sidebar-icon:hover {
+      background: rgba(255,107,43,0.08);
+    }
+    .sidebar-icon.active {
+      border-color: #FF6B2B;
+    }
+    .sidebar-icon .icon-emoji {
+      font-size: 20px;
+      line-height: 1;
+    }
+    .sidebar-icon .icon-label {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 4px;
+      color: #888888;
+      text-align: center;
+      letter-spacing: 0.03em;
+      line-height: 1.4;
+    }
+    .sidebar-icon.active .icon-label {
+      color: #FF6B2B;
+    }
+
+    /* ── Main area ── */
+    .main {
+      position: fixed;
+      top: 26px; left: 72px; right: 0; bottom: 24px;
+      overflow: hidden;
+    }
+
+    /* ── Watermark ── */
+    .watermark {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: 'Press Start 2P', monospace;
+      font-size: 13px;
+      color: rgba(0,0,0,0.025);
+      white-space: nowrap;
+      pointer-events: none;
+      z-index: 0;
+      text-align: center;
+      line-height: 2.2;
+    }
+
+    /* ── Photos ── */
+    .photos-wrap {
+      position: absolute;
+      top: 18px; right: 18px;
+      display: flex;
+      align-items: flex-start;
+      z-index: 10;
+      pointer-events: auto;
+    }
+    .photo-item {
+      position: relative;
+      display: inline-block;
+      transition: transform 0.2s ease, z-index 0s;
+    }
+    .photo-item:first-child {
+      transform: rotate(-2.5deg);
+      z-index: 2;
+      margin-right: -14px;
+    }
+    .photo-item:last-child {
+      transform: rotate(2deg);
+      margin-top: 18px;
+      z-index: 1;
+    }
+    .photo-item:hover {
+      transform: rotate(0deg) scale(1.06) !important;
+      z-index: 20 !important;
+    }
+    .photo-item::before {
+      content: '';
+      position: absolute;
+      top: -5px; left: 50%;
+      transform: translateX(-50%) rotate(-2deg);
+      width: 38px; height: 10px;
+      background: rgba(200,175,130,0.55);
+      z-index: 3;
+    }
+    .photo-item img {
+      display: block;
+      width: 100px; height: 125px;
+      object-fit: cover;
+      object-position: center top;
+      box-shadow: 2px 4px 12px rgba(0,0,0,0.12);
+    }
+
+    /* ── Name block ── */
+    .name-block {
+      position: absolute;
+      bottom: 14px; left: 20px;
+      z-index: 10;
+    }
+    .open-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      border: 1px solid rgba(34,197,94,0.4);
+      border-radius: 100px;
+      padding: 2px 9px 1px;
+      margin-bottom: 7px;
+      background: rgba(34,197,94,0.06);
+    }
+    .badge-dot {
+      width: 6px; height: 6px;
+      background: #22C55E;
+      border-radius: 50%;
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.35; }
+    }
+    .badge-text {
+      font-family: 'VT323', monospace;
+      font-size: 13px;
+      color: #22C55E;
+      line-height: 1;
+    }
+    .name-block h1 {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 14px;
+      color: #1A1A1A;
+      margin-bottom: 8px;
+      line-height: 1.5;
+    }
+    .bio-line {
+      display: block;
+      font-family: 'VT323', monospace;
+      font-size: 16px;
+      color: #1A1A1A;
+      line-height: 1.45;
+    }
+    .bio-line a {
+      color: #FF6B2B;
+      text-decoration: none;
+    }
+    .bio-line a:hover { text-decoration: underline; }
+
+    /* ── Windows ── */
+    .window {
+      position: absolute;
+      top: 10px; left: 10px; right: 250px; bottom: 130px;
+      background: #FFFCF7;
+      border: 1px solid #EDE5D8;
+      border-radius: 6px;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.06);
+      display: none;
+      flex-direction: column;
+      z-index: 50;
+    }
+    .window.open { display: flex; }
+
+    .window-titlebar {
+      height: 28px;
+      background: #FFF3E6;
+      border-bottom: 1px solid #EDE5D8;
+      border-radius: 6px 6px 0 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 10px;
+      flex-shrink: 0;
+    }
+    .window-title {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 7px;
+      color: #1A1A1A;
+      letter-spacing: 0.04em;
+    }
+    .window-close {
+      width: 16px; height: 16px;
+      border: 1px solid #D4C9B8;
+      border-radius: 3px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'VT323', monospace;
+      font-size: 12px;
+      cursor: pointer;
+      background: #FFFCF7;
+      color: #888888;
+      line-height: 1;
+      transition: background 0.1s, color 0.1s;
+    }
+    .window-close:hover {
+      background: #FF6B2B;
+      border-color: #FF6B2B;
+      color: #fff;
+    }
+    .window-body {
+      flex: 1;
+      overflow-y: auto;
+      padding: 18px 20px;
+      font-family: 'VT323', monospace;
+      font-size: 16px;
+      line-height: 1.7;
+    }
+    .window-body::-webkit-scrollbar { width: 4px; }
+    .window-body::-webkit-scrollbar-track { background: #FFFCF7; }
+    .window-body::-webkit-scrollbar-thumb { background: #EDE5D8; border-radius: 2px; }
+
+    /* ── Window internals ── */
+    .win-section {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 7px;
+      color: #FF6B2B;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin: 20px 0 10px 0;
+      padding-bottom: 6px;
+      border-bottom: 1px solid #EDE5D8;
+    }
+    .win-section:first-child { margin-top: 0; }
+
+    .win-divider {
+      color: #888888;
+      margin: 10px 0;
+      font-size: 14px;
+    }
+
+    .entry-company {
+      font-size: 17px;
+      font-weight: bold;
+      color: #1A1A1A;
+      line-height: 1.3;
+    }
+    .entry-meta {
+      font-size: 14px;
+      color: #888888;
+      margin-bottom: 4px;
+    }
+    .entry-bullets {
+      list-style: disc;
+      padding-left: 18px;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+    .entry-bullets li { margin-bottom: 2px; }
+
+    .win-link {
+      color: #FF6B2B;
+      text-decoration: none;
+    }
+    .win-link:hover { text-decoration: underline; }
+
+    .download-link {
+      display: inline-block;
+      margin-bottom: 16px;
+      color: #FF6B2B;
+      text-decoration: none;
+      font-size: 15px;
+    }
+    .download-link:hover { text-decoration: underline; }
+
+    /* Tags / pills */
+    .tags-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin-top: 6px;
+    }
+    .tag {
+      border: 1px solid #E0D8CA;
+      border-radius: 100px;
+      padding: 1px 9px;
+      font-family: 'VT323', monospace;
+      font-size: 13px;
+      color: #888888;
+    }
+
+    /* Skills */
+    .skill-row { margin-bottom: 10px; }
+    .skill-key {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 6px;
+      color: #FF6B2B;
+      display: block;
+      margin-bottom: 4px;
+      letter-spacing: 0.05em;
+    }
+    .skill-val {
+      font-size: 15px;
+      line-height: 1.5;
+    }
+
+    /* About prose / word hover */
+    .prose-para {
+      margin-bottom: 12px;
+      font-size: 16px;
+      line-height: 1.75;
+    }
+    .word { transition: color 0.9s ease; }
+    .word:hover {
+      color: #FF6B2B;
+      cursor: default;
+      transition: color 0.05s ease;
+    }
+    .about-links { margin-top: 14px; }
+    .about-links div {
+      font-size: 15px;
+      margin-bottom: 4px;
+    }
+
+    /* Projects */
+    .project-entry { margin-bottom: 14px; }
+    .project-name {
+      font-size: 17px;
+      font-weight: bold;
+      color: #1A1A1A;
+      line-height: 1.4;
+    }
+    .project-case-link {
+      font-family: 'VT323', monospace;
+      font-size: 14px;
+      color: #FF6B2B;
+      text-decoration: none;
+      margin-left: 8px;
+    }
+    .project-case-link:hover { text-decoration: underline; }
+    .project-desc {
+      font-size: 15px;
+      color: #1A1A1A;
+      margin: 3px 0 5px 0;
+      line-height: 1.5;
+    }
+
+    /* Research */
+    .research-entry { margin-bottom: 14px; }
+    .research-title {
+      font-size: 16px;
+      font-weight: bold;
+      line-height: 1.3;
+    }
+    .research-desc {
+      font-size: 15px;
+      color: #1A1A1A;
+      margin-top: 4px;
+      line-height: 1.5;
+    }
+
+    /* Contact */
+    .contact-tagline {
+      font-size: 16px;
+      margin-bottom: 14px;
+      line-height: 1.5;
+    }
+    .contact-list { list-style: none; padding: 0; }
+    .contact-list li {
+      margin-bottom: 7px;
+      font-size: 16px;
+    }
+    .contact-list li::before {
+      content: '→ ';
+      color: #FF6B2B;
+    }
+    .contact-list a {
+      color: #FF6B2B;
+      text-decoration: none;
+    }
+    .contact-list a:hover { text-decoration: underline; }
+
+    /* IN PROGRESS tooltip */
+    .in-progress-wrap {
+      position: relative;
+      display: inline-block;
+      cursor: default;
+    }
+    .in-progress-wrap::after {
+      content: '⏱  IN PROGRESS...';
+      position: absolute;
+      bottom: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%) scale(0.96);
+      background: #1A1A1A;
+      color: #FFFCF7;
+      padding: 5px 13px;
+      border-radius: 100px;
+      font-family: 'Press Start 2P', monospace;
+      font-size: 6px;
+      letter-spacing: 0.08em;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.15s ease, transform 0.15s ease;
+      z-index: 200;
+    }
+    .in-progress-wrap:hover::after {
+      opacity: 1;
+      transform: translateX(-50%) scale(1);
+    }
+
+    /* Click spark */
+    .spark {
+      position: fixed;
+      width: 6px; height: 6px;
+      background: #FF6B2B;
+      border-radius: 50%;
+      pointer-events: none;
+      transform: translate(-50%, -50%) scale(0);
+      animation: spark-anim 0.4s ease-out forwards;
+      z-index: 9999;
+    }
+    @keyframes spark-anim {
+      0%   { transform: translate(-50%, -50%) scale(0); opacity: 1; }
+      100% { transform: translate(-50%, -50%) scale(4); opacity: 0; }
+    }
+  </style>
 </head>
 <body>
-  <main>
-    <div class="photos">
-      <div class="photo-wrap">
-        <img src="media/IMG_1963.JPG" alt="Navya Shah">
-      </div>
-      <div class="photo-wrap">
+
+  <!-- Menubar -->
+  <div class="menubar">
+    <span class="menubar-brand">▲ NAVYA OS</span>
+    <div class="menubar-right">
+      <span>navyashah6@gmail.com</span>
+      <span id="menu-clock"></span>
+    </div>
+  </div>
+
+  <!-- Taskbar -->
+  <div class="taskbar">
+    <span class="taskbar-left">navyashah.me · 2026</span>
+    <span class="taskbar-right" id="task-clock"></span>
+  </div>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <div class="sidebar-icon active" data-window="home" onclick="openWindow('home')">
+      <span class="icon-emoji">🏠</span>
+      <span class="icon-label">HOME</span>
+    </div>
+    <div class="sidebar-icon" data-window="about" onclick="openWindow('about')">
+      <span class="icon-emoji">📄</span>
+      <span class="icon-label">ABOUT</span>
+    </div>
+    <div class="sidebar-icon" data-window="resume" onclick="openWindow('resume')">
+      <span class="icon-emoji">📋</span>
+      <span class="icon-label">RESUME</span>
+    </div>
+    <div class="sidebar-icon" data-window="projects" onclick="openWindow('projects')">
+      <span class="icon-emoji">⚡</span>
+      <span class="icon-label">PROJECTS</span>
+    </div>
+    <div class="sidebar-icon" data-window="research" onclick="openWindow('research')">
+      <span class="icon-emoji">📎</span>
+      <span class="icon-label">RESEARCH</span>
+    </div>
+    <div class="sidebar-icon" data-window="contact" onclick="openWindow('contact')">
+      <span class="icon-emoji">✉</span>
+      <span class="icon-label">CONTACT</span>
+    </div>
+  </div>
+
+  <!-- Main area -->
+  <div class="main" id="desktop">
+
+    <div class="watermark">BUILDING SOLUTIONS.</div>
+
+    <!-- Photos -->
+    <div class="photos-wrap">
+      <div class="photo-item">
         <img src="media/IMG_4717.JPG" alt="Navya Shah">
       </div>
+      <div class="photo-item">
+        <img src="media/IMG_1963.JPG" alt="Navya Shah">
+      </div>
     </div>
 
-    <h1>Navya Shah</h1>
-
-    <div class="bio-block">
-      <p>product &amp; ops</p>
-      <p>usc econ + data science, ms cybersecurity</p>
-      <p>building <span class="in-progress-wrap">local app</span> (ai food recs), currently at <a href="https://spin.ai" target="_blank" rel="noopener">spin.ai</a></p>
-      <p>📍 los angeles, open to relocate</p>
+    <!-- Name block -->
+    <div class="name-block">
+      <div class="open-badge">
+        <div class="badge-dot"></div>
+        <span class="badge-text">open to work</span>
+      </div>
+      <h1>Navya Shah</h1>
+      <span class="bio-line">product &amp; ops · usc '26</span>
+      <span class="bio-line">building <span class="in-progress-wrap">local</span>, currently at <a href="https://spin.ai" target="_blank" rel="noopener">spin.ai</a></span>
+      <span class="bio-line">📍 los angeles, open to relocate</span>
     </div>
 
-    <nav class="home-nav">
-      <a href="/about">&gt; about</a>
-      <a href="/resume">&gt; resume</a>
-      <a href="/projects">&gt; projects</a>
-      <a href="/research">&gt; research</a>
-      <a href="/contact">&gt; contact</a>
-    </nav>
-  </main>
+    <!-- ABOUT window -->
+    <div class="window" id="win-about">
+      <div class="window-titlebar">
+        <span class="window-title">📄 ABOUT.exe</span>
+        <div class="window-close" onclick="closeWindow()">✕</div>
+      </div>
+      <div class="window-body">
+        <div class="about-prose">
+          <p class="prose-para">I find things that are broken and fix them because I can't not notice.</p>
+          <p class="prose-para">I've wanted to build something of my own ever since I can remember. With technology growing at unimaginable speeds, this could be my own app, startup, or even my personal brand.</p>
+          <p class="prose-para">I started off on the traditional finance path, study economics and then become a financial analyst/investment banker. But real satisfaction came when I challenged myself to learn something I always doubted myself a lot to pick up: coding.</p>
+          <p class="prose-para">Taking on a Data Science double major let me explore learning that I truly enjoyed. It took me from learn the basics of python to being a teaching assistant for OOP for about 2 years. I learned how to communicate the technical to non-technical, developed problem solving in myself and others, all while building a community along the way.</p>
+          <p class="prose-para">I stayed on at USC to finish my Master's in Cybersecurity Engineering through my DS degree. I know, big jump but it was well worth it as I conquered understanding computer systems on an infrastructure level all while learning best security practices.</p>
+          <p class="prose-para">My unique background brought me to my perfect fit: product management. Really a role where you get to play entreprenuer simulator and own everything you research and build. I truly enjoyed behind the scenes and making the features users actually touched. I started by doing this back home in Mumbai at Quantech Datascience for a tax compliance app pre-launch and continued it over in LA where I worked with Spin.AI on their cybersecurity platform.</p>
+          <p class="prose-para">The thread through all of it has really been: operating and building with real stakes attached.</p>
+          <p class="prose-para">Right now, I'm in love with building/designing software with Claude Code and Codex. This is curently what I'm focused on, shipping apps I like while also documenting the build, what it looks like to ship a consumer AI product as a solo builder.</p>
+          <p class="prose-para">Looking for product or operations at SF startups where the problem is real.</p>
+          <p class="prose-para">If any of this resonated with you or you just want to talk...</p>
+        </div>
+        <div class="about-links">
+          <div>→ <a class="win-link" href="mailto:navyashah6@gmail.com">navyashah6@gmail.com</a></div>
+          <div>→ <a class="win-link" href="https://linkedin.com/in/navyashah6" target="_blank" rel="noopener">linkedin.com/in/navyashah6</a></div>
+          <div>→ <a class="win-link" href="https://github.com/navyashah" target="_blank" rel="noopener">github.com/navyashah</a></div>
+        </div>
+      </div>
+    </div>
 
-  <footer>
-    <p>navyashah.me · 2026</p>
-  </footer>
+    <!-- RESUME window -->
+    <div class="window" id="win-resume">
+      <div class="window-titlebar">
+        <span class="window-title">📋 RESUME.exe</span>
+        <div class="window-close" onclick="closeWindow()">✕</div>
+      </div>
+      <div class="window-body">
+        <a class="download-link" href="media/resume.pdf" target="_blank" rel="noopener">&gt; download PDF</a>
+
+        <div class="win-section">Education</div>
+        <div>
+          <div class="entry-company">University of Southern California</div>
+          <div class="entry-meta">los angeles, ca</div>
+          <div style="font-size:15px; margin-bottom:2px;">MS: Cyber Security Engineering, GPA: 3.83 <span style="color:#888888">· may 2026</span></div>
+          <div style="font-size:15px;">BA: Economics and Data Science, Minor in Business Law. Cum Laude. <span style="color:#888888">· may 2025</span></div>
+        </div>
+
+        <div class="win-section">Experience</div>
+
+        <div style="margin-bottom:10px;">
+          <div class="entry-company">Spin.AI</div>
+          <div class="entry-meta">product management intern · sept 2025 – present</div>
+          <ul class="entry-bullets">
+            <li>Analyzed 20+ SaaS products to identify feature gaps and built 100+ security control mappings.</li>
+            <li>Defined requirements for a Value-Added Partner security controls feature: assessed how partner configurations would interact with platform-level settings, mapped edge cases, and wrote a BRD.</li>
+            <li>Identified that solutions engineers had to fully log out and back in to switch client accounts; designed the UX flow to resolve it and validated the pain point with customer success before scoping.</li>
+            <li>Collaborated with engineering on acceptance criteria, edge case identification, and sandbox integration.</li>
+          </ul>
+        </div>
+        <div class="win-divider">——</div>
+        <div style="margin-bottom:10px;">
+          <div class="entry-company">Quantech Datascience</div>
+          <div class="entry-meta">operations intern · jun 2025 – aug 2025</div>
+          <ul class="entry-bullets">
+            <li>Evaluated security controls across the database, API layer, file storage, and user management for Ritetax, a tax compliance product handling sensitive financial data for chartered accountant firms.</li>
+            <li>Identified that client data separation was enforced at the UI layer. Tested to confirm unauthorized data access, documented the gap reproducibly, and escalated to engineering for a pre-launch fix.</li>
+            <li>Detected through log analysis that the OCR pipeline silently returned incomplete data. Recommended a post-extraction completeness check that now flags bad scans immediately.</li>
+          </ul>
+        </div>
+        <div class="win-divider">——</div>
+        <div style="margin-bottom:10px;">
+          <div class="entry-company">IREP Credit Capital</div>
+          <div class="entry-meta">financial analyst intern · may 2024 – jul 2024</div>
+          <ul class="entry-bullets">
+            <li>Built SQL-driven loan default tracker analyzing 1,000+ accounts, improving accuracy of risk monitoring by 20%. Done by using behavioral buckets to identify risk patterns after examining disbursement data.</li>
+            <li>Synthesized market data into insights that guided portfolio strategy and risk modeling discussions.</li>
+          </ul>
+        </div>
+        <div class="win-divider">——</div>
+        <div style="margin-bottom:10px;">
+          <div class="entry-company">University of Southern California</div>
+          <div class="entry-meta">teaching assistant · aug 2023 – may 2025</div>
+          <ul class="entry-bullets">
+            <li>Supported 100+ students through help sessions and assignment reviews, clarifying coding concepts.</li>
+            <li>Debugged student code in Java OOP assignments, identifying logic errors and edge cases in real time.</li>
+          </ul>
+        </div>
+
+        <div class="win-section">Projects</div>
+
+        <div style="margin-bottom:10px;">
+          <div class="entry-company">LUCERNA · hacking for defense</div>
+          <ul class="entry-bullets">
+            <li>Led problem definition for an Air Force contracting visibility system: synthesized insights across stakeholder interviews, and defined the system architecture for an LLM-powered Text2SQL pipeline that enables non-technical users to query fragmented contract data in natural language.</li>
+          </ul>
+        </div>
+        <div class="win-divider">——</div>
+        <div style="margin-bottom:10px;">
+          <div class="entry-company">Local · consumer food recommendation app</div>
+          <ul class="entry-bullets">
+            <li>Building a RAG pipeline using pgvector and Supabase to surface hyper-local restaurant recommendations from unstructured data across reviews, ratings, and creator content. React PWA frontend with intent classification and conversation layer powered by Claude.</li>
+          </ul>
+        </div>
+
+        <div class="win-section">Skills</div>
+
+        <div class="skill-row">
+          <span class="skill-key">certifications</span>
+          <div class="tags-wrap">
+            <span class="tag">CompTIA Security+ (in progress)</span>
+            <span class="tag">Google Cybersecurity Professional Certificate</span>
+          </div>
+        </div>
+        <div class="skill-row">
+          <span class="skill-key">technical</span>
+          <div class="tags-wrap">
+            <span class="tag">Python</span><span class="tag">Java</span><span class="tag">SQL</span>
+            <span class="tag">Linux</span><span class="tag">AWS</span><span class="tag">MongoDB</span>
+            <span class="tag">APIs</span><span class="tag">Node.js</span><span class="tag">JavaScript</span>
+            <span class="tag">React</span><span class="tag">Postgres</span>
+          </div>
+        </div>
+        <div class="skill-row">
+          <span class="skill-key">product / ops</span>
+          <div class="tags-wrap">
+            <span class="tag">Customer Success</span><span class="tag">Implementation</span>
+            <span class="tag">Workflow Design</span><span class="tag">Process Improvement</span>
+            <span class="tag">Cross-Functional Collaboration</span><span class="tag">Feature Definition</span>
+            <span class="tag">Problem Solving</span><span class="tag">Market Research</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROJECTS window -->
+    <div class="window" id="win-projects">
+      <div class="window-titlebar">
+        <span class="window-title">⚡ PROJECTS.exe</span>
+        <div class="window-close" onclick="closeWindow()">✕</div>
+      </div>
+      <div class="window-body">
+        <p style="font-size:15px; color:#888888; margin-bottom:18px;">here's what i've shipped and worked on.</p>
+
+        <div class="project-entry">
+          <div class="project-name">🥘 local <span class="in-progress-wrap project-case-link">app →</span></div>
+          <div class="project-desc">ai food recommendation app that finds the right place for you, narrows down menu items you'd like and helps you plan with friends.</div>
+          <div class="tags-wrap">
+            <span class="tag">react</span><span class="tag">rag</span><span class="tag">supabase</span>
+            <span class="tag">claude api</span><span class="tag">pgvector</span>
+          </div>
+        </div>
+
+        <div class="win-divider">——</div>
+
+        <div class="project-entry">
+          <div class="project-name">⚡️ spin — value added partner custom controls feature <a class="project-case-link" href="https://docs.google.com/presentation/d/e/2PACX-1vSlJO_kcigPJuzq4JGRm_VdeaB_Q8_xzUonESna03EkkVC-L5ePXOfNqky93VkYWf4Wxz6or_dHUeUM/pub?start=true&loop=false&delayms=3000" target="_blank" rel="noopener">case study →</a></div>
+          <div class="project-desc">designed a system letting enterprise partners customize security controls at both the configuration and interface level.</div>
+          <div class="tags-wrap">
+            <span class="tag">product design</span><span class="tag">ux</span>
+            <span class="tag">brd</span><span class="tag">saas security</span>
+          </div>
+        </div>
+
+        <div class="win-divider">——</div>
+
+        <div class="project-entry">
+          <div class="project-name">🪖 lucerna <a class="project-case-link" href="https://docs.google.com/presentation/d/e/2PACX-1vS376U75ZdgrH64tOyVsI8dDeca4NmwzemmiYp9xb_57Bh3lq03wS7cr4OKxEuvUXVhxQC74-e8pN6r/pub?start=true&loop=false&delayms=3000" target="_blank" rel="noopener">case study →</a></div>
+          <div class="project-desc">US Air Force contracting dashboard with timeline and funding management, powered by an LLM to make complex contract data queryable easily.</div>
+          <div class="tags-wrap">
+            <span class="tag">django</span><span class="tag">react</span><span class="tag">postgres</span>
+            <span class="tag">docker</span><span class="tag">llm</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RESEARCH window -->
+    <div class="window" id="win-research">
+      <div class="window-titlebar">
+        <span class="window-title">📎 RESEARCH.exe</span>
+        <div class="window-close" onclick="closeWindow()">✕</div>
+      </div>
+      <div class="window-body">
+        <div class="research-entry">
+          <div class="research-title">Security Policy Analysis <a class="win-link" href="media/DSCI%20519%20Semester%20Project%20-%20Navya%20Shah.pdf" target="_blank" rel="noopener" style="font-size:14px; margin-left:6px;">pdf →</a></div>
+          <div class="research-desc">Research on organizational security policy design — how policies get written, where they break down in practice, and what makes them actually enforceable versus decorative.</div>
+        </div>
+        <div class="win-divider">——</div>
+        <div class="research-entry">
+          <div class="research-title">Decentralized Key Management <a class="win-link" href="media/Navya%20Shah%20-%20Research%20paper%20CSCI530.pdf" target="_blank" rel="noopener" style="font-size:14px; margin-left:6px;">pdf →</a></div>
+          <div class="research-desc">Cybersecurity engineering paper on decentralized approaches to cryptographic key management. Covers threat models, architecture tradeoffs, and practical implementation considerations.</div>
+        </div>
+        <div class="win-divider">——</div>
+        <div class="research-entry">
+          <div class="research-title">Biometric Authentication Systems <a class="win-link" href="media/Research%20Paper.pdf" target="_blank" rel="noopener" style="font-size:14px; margin-left:6px;">pdf →</a></div>
+          <div class="research-desc">Survey and analysis of biometric authentication — modalities, vulnerabilities, and where current systems fail under real-world conditions.</div>
+        </div>
+        <div class="win-divider">——</div>
+        <div class="research-entry">
+          <div class="research-title">Cybersecurity Case Challenge · company audit <a class="win-link" href="media/Company%20Assignment%20Challenge.xlsx" target="_blank" rel="noopener" style="font-size:14px; margin-left:6px;">file →</a></div>
+          <div class="research-desc">Security assessment and strategic recommendation for a real company scenario. Involved threat modeling, gap analysis, and presenting findings.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CONTACT window -->
+    <div class="window" id="win-contact">
+      <div class="window-titlebar">
+        <span class="window-title">✉ CONTACT.exe</span>
+        <div class="window-close" onclick="closeWindow()">✕</div>
+      </div>
+      <div class="window-body">
+        <p class="contact-tagline">email is the best way to reach me at <a class="win-link" href="mailto:navyashah6@gmail.com">navyashah6@gmail.com</a></p>
+        <ul class="contact-list">
+          <li><a href="https://linkedin.com/in/navyashah6" target="_blank" rel="noopener">LinkedIn</a></li>
+          <li><a href="https://github.com/navyashah" target="_blank" rel="noopener">GitHub</a></li>
+          <li><a href="media/resume.pdf" target="_blank" rel="noopener">Resume</a></li>
+        </ul>
+      </div>
+    </div>
+
+  </div><!-- /.main -->
+
+  <script>
+    // Clock
+    function updateClock() {
+      const now = new Date();
+      let h = now.getHours();
+      const m = String(now.getMinutes()).padStart(2, '0');
+      const ampm = h >= 12 ? 'PM' : 'AM';
+      h = h % 12 || 12;
+      const t = h + ':' + m + ' ' + ampm;
+      document.getElementById('menu-clock').textContent = t;
+      document.getElementById('task-clock').textContent = t;
+    }
+    updateClock();
+    setInterval(updateClock, 1000);
+
+    // Window management
+    let current = 'home';
+
+    function openWindow(name) {
+      if (name === current && name !== 'home') {
+        closeWindow();
+        return;
+      }
+      document.querySelectorAll('.window').forEach(w => w.classList.remove('open'));
+      document.querySelectorAll('.sidebar-icon').forEach(i => i.classList.remove('active'));
+      current = name;
+      if (name !== 'home') {
+        const win = document.getElementById('win-' + name);
+        if (win) win.classList.add('open');
+      }
+      const icon = document.querySelector('[data-window="' + name + '"]');
+      if (icon) icon.classList.add('active');
+    }
+
+    function closeWindow() { openWindow('home'); }
+
+    // Click spark (desktop bg only)
+    document.getElementById('desktop').addEventListener('click', function(e) {
+      if (e.target.closest('.window') || e.target.closest('.photos-wrap') || e.target.closest('.name-block')) return;
+      const s = document.createElement('div');
+      s.className = 'spark';
+      s.style.left = e.clientX + 'px';
+      s.style.top = e.clientY + 'px';
+      document.body.appendChild(s);
+      setTimeout(() => s.remove(), 420);
+    });
+
+    // Word-level hover on about prose
+    document.querySelectorAll('.about-prose .prose-para').forEach(function(p) {
+      p.innerHTML = p.textContent.split(' ').map(function(w) {
+        return '<span class="word">' + w + '</span>';
+      }).join(' ');
+    });
+  </script>
 </body>
 </html>

@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Navya Shah — product and ops. Building Local. Currently at Spin.AI.">
+  <title>Navya Shah</title>
+  <link rel="icon" type="image/png" href="media/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #FAF6EF;
+      color: #1A1A1A;
+      font-family: 'VT323', monospace;
+      min-height: 100vh;
+    }
+
+    /* ── Sticky header ── */
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: #FFF8F0;
+      border-bottom: 1px solid #EDE5D8;
+    }
+    .header-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 16px;
+      height: 38px;
+    }
+    .header-brand {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 7px;
+      color: #FF6B2B;
+      letter-spacing: 0.04em;
+    }
+    .header-clock {
+      font-family: 'VT323', monospace;
+      font-size: 15px;
+      color: #888888;
+    }
+
+    /* ── Ticker ── */
+    .ticker {
+      overflow: hidden;
+      border-top: 1px solid #EDE5D8;
+      background: #FFF8F0;
+      height: 22px;
+      display: flex;
+      align-items: center;
+    }
+    .ticker-track {
+      display: flex;
+      white-space: nowrap;
+      animation: ticker-scroll 22s linear infinite;
+    }
+    .ticker-track span {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 5px;
+      color: #FF6B2B;
+      letter-spacing: 0.06em;
+      padding-right: 40px;
+    }
+    @keyframes ticker-scroll {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* ── Cards ── */
+    .cards {
+      padding: 16px 14px 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .card {
+      background: #FFFCF7;
+      border: 1px solid #EDE5D8;
+      border-radius: 6px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+      overflow: hidden;
+    }
+
+    .card-titlebar {
+      background: #FFF3E6;
+      border-bottom: 1px solid #EDE5D8;
+      padding: 8px 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .card-title {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 6px;
+      color: #1A1A1A;
+      letter-spacing: 0.04em;
+    }
+    .card-dot {
+      width: 10px; height: 10px;
+      border: 1px solid #D4C9B8;
+      border-radius: 2px;
+      background: #FFFCF7;
+    }
+
+    .card-body {
+      padding: 16px 14px;
+      font-family: 'VT323', monospace;
+      font-size: 17px;
+      line-height: 1.65;
+    }
+
+    /* ── Section header inside card ── */
+    .win-section {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 6px;
+      color: #FF6B2B;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin: 18px 0 9px 0;
+      padding-bottom: 5px;
+      border-bottom: 1px solid #EDE5D8;
+    }
+    .win-section:first-child { margin-top: 0; }
+
+    .win-divider {
+      color: #888888;
+      margin: 10px 0;
+      font-size: 14px;
+    }
+
+    /* ── Home card ── */
+    .home-photos {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 16px;
+    }
+    .photo-item {
+      position: relative;
+      display: inline-block;
+    }
+    .photo-item:first-child { transform: rotate(-2deg); }
+    .photo-item:last-child  { transform: rotate(2deg); margin-top: 14px; }
+    .photo-item::before {
+      content: '';
+      position: absolute;
+      top: -5px; left: 50%;
+      transform: translateX(-50%) rotate(-2deg);
+      width: 34px; height: 9px;
+      background: rgba(200,175,130,0.55);
+      z-index: 2;
+    }
+    .photo-item img {
+      display: block;
+      width: 110px; height: 138px;
+      object-fit: cover;
+      object-position: center top;
+      box-shadow: 2px 4px 12px rgba(0,0,0,0.12);
+    }
+
+    .open-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      border: 1px solid rgba(34,197,94,0.4);
+      border-radius: 100px;
+      padding: 2px 9px 1px;
+      margin-bottom: 8px;
+      background: rgba(34,197,94,0.06);
+    }
+    .badge-dot {
+      width: 6px; height: 6px;
+      background: #22C55E;
+      border-radius: 50%;
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.35; }
+    }
+    .badge-text {
+      font-family: 'VT323', monospace;
+      font-size: 13px;
+      color: #22C55E;
+    }
+
+    .home-name {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 12px;
+      color: #1A1A1A;
+      margin-bottom: 8px;
+      line-height: 1.6;
+    }
+    .bio-line {
+      display: block;
+      font-family: 'VT323', monospace;
+      font-size: 17px;
+      color: #1A1A1A;
+      line-height: 1.45;
+    }
+    .bio-line a {
+      color: #FF6B2B;
+      text-decoration: none;
+    }
+
+    /* ── About ── */
+    .prose-para {
+      margin-bottom: 10px;
+      font-size: 17px;
+      line-height: 1.65;
+    }
+    .about-links { margin-top: 12px; }
+    .about-links div {
+      font-size: 16px;
+      margin-bottom: 4px;
+    }
+
+    /* ── Links ── */
+    .win-link {
+      color: #FF6B2B;
+      text-decoration: none;
+    }
+    .win-link:hover { text-decoration: underline; }
+
+    .download-link {
+      display: inline-block;
+      margin-bottom: 14px;
+      color: #FF6B2B;
+      text-decoration: none;
+      font-size: 15px;
+    }
+
+    /* ── Resume entries ── */
+    .entry-company {
+      font-size: 18px;
+      font-weight: bold;
+      line-height: 1.3;
+    }
+    .entry-meta {
+      font-size: 14px;
+      color: #888888;
+      margin-bottom: 4px;
+    }
+    .entry-bullets {
+      list-style: disc;
+      padding-left: 18px;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+    .entry-bullets li { margin-bottom: 2px; }
+
+    /* ── Tags ── */
+    .tags-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin-top: 6px;
+    }
+    .tag {
+      border: 1px solid #E0D8CA;
+      border-radius: 100px;
+      padding: 1px 8px;
+      font-family: 'VT323', monospace;
+      font-size: 13px;
+      color: #888888;
+    }
+
+    /* ── Skills ── */
+    .skill-row { margin-bottom: 10px; }
+    .skill-key {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 5px;
+      color: #FF6B2B;
+      display: block;
+      margin-bottom: 5px;
+      letter-spacing: 0.05em;
+    }
+
+    /* ── Projects ── */
+    .project-entry { margin-bottom: 14px; }
+    .project-name {
+      font-size: 18px;
+      font-weight: bold;
+      line-height: 1.4;
+    }
+    .project-case-link {
+      font-family: 'VT323', monospace;
+      font-size: 15px;
+      color: #FF6B2B;
+      text-decoration: none;
+      margin-left: 6px;
+    }
+    .project-desc {
+      font-size: 16px;
+      margin: 3px 0 5px 0;
+      line-height: 1.5;
+    }
+
+    /* ── Research ── */
+    .research-entry { margin-bottom: 14px; }
+    .research-title {
+      font-size: 17px;
+      font-weight: bold;
+      line-height: 1.3;
+    }
+    .research-desc {
+      font-size: 15px;
+      margin-top: 3px;
+      line-height: 1.5;
+    }
+
+    /* ── Contact ── */
+    .contact-tagline {
+      font-size: 17px;
+      margin-bottom: 12px;
+      line-height: 1.5;
+    }
+    .contact-list { list-style: none; padding: 0; }
+    .contact-list li {
+      margin-bottom: 6px;
+      font-size: 17px;
+    }
+    .contact-list li::before {
+      content: '→ ';
+      color: #FF6B2B;
+    }
+    .contact-list a {
+      color: #FF6B2B;
+      text-decoration: none;
+    }
+
+    /* ── IN PROGRESS tooltip ── */
+    .in-progress-wrap {
+      position: relative;
+      display: inline-block;
+      cursor: default;
+    }
+    .in-progress-wrap::after {
+      content: '⏱  IN PROGRESS...';
+      position: absolute;
+      bottom: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%) scale(0.96);
+      background: #1A1A1A;
+      color: #FFFCF7;
+      padding: 5px 12px;
+      border-radius: 100px;
+      font-family: 'Press Start 2P', monospace;
+      font-size: 5px;
+      letter-spacing: 0.08em;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.15s ease, transform 0.15s ease;
+      z-index: 50;
+    }
+    .in-progress-wrap:hover::after,
+    .in-progress-wrap:active::after {
+      opacity: 1;
+      transform: translateX(-50%) scale(1);
+    }
+
+    /* ── Footer ── */
+    .footer {
+      text-align: center;
+      padding: 12px;
+      font-family: 'VT323', monospace;
+      font-size: 13px;
+      color: #888888;
+      border-top: 1px solid #EDE5D8;
+      background: #FFF8F0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sticky header -->
+  <div class="header">
+    <div class="header-top">
+      <span class="header-brand">▲ NAVYA OS</span>
+      <span class="header-clock" id="mob-clock"></span>
+    </div>
+    <div class="ticker">
+      <div class="ticker-track">
+        <span>PRODUCT &amp; OPS · BUILDING LOCAL · SPIN.AI · USC '26 · LOS ANGELES · OPEN TO WORK · </span>
+        <span>PRODUCT &amp; OPS · BUILDING LOCAL · SPIN.AI · USC '26 · LOS ANGELES · OPEN TO WORK · </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="cards">
+
+    <!-- HOME card -->
+    <div class="card">
+      <div class="card-titlebar">
+        <span class="card-title">🏠 HOME</span>
+        <div class="card-dot"></div>
+      </div>
+      <div class="card-body">
+        <div class="home-photos">
+          <div class="photo-item">
+            <img src="media/IMG_4717.JPG" alt="Navya Shah">
+          </div>
+          <div class="photo-item">
+            <img src="media/IMG_1963.JPG" alt="Navya Shah">
+          </div>
+        </div>
+        <div class="open-badge">
+          <div class="badge-dot"></div>
+          <span class="badge-text">open to work</span>
+        </div>
+        <div class="home-name">Navya Shah</div>
+        <span class="bio-line">product &amp; ops · usc '26</span>
+        <span class="bio-line">building <span class="in-progress-wrap">local</span>, currently at <a href="https://spin.ai" target="_blank" rel="noopener">spin.ai</a></span>
+        <span class="bio-line">📍 los angeles, open to relocate</span>
+      </div>
+    </div>
+
+    <!-- ABOUT card -->
+    <div class="card">
+      <div class="card-titlebar">
+        <span class="card-title">📄 ABOUT.exe</span>
+        <div class="card-dot"></div>
+      </div>
+      <div class="card-body">
+        <p class="prose-para">I find things that are broken and fix them because I can't not notice.</p>
+        <p class="prose-para">I've wanted to build something of my own ever since I can remember. With technology growing at unimaginable speeds, this could be my own app, startup, or even my personal brand.</p>
+        <p class="prose-para">I started off on the traditional finance path, study economics and then become a financial analyst/investment banker. But real satisfaction came when I challenged myself to learn something I always doubted myself a lot to pick up: coding.</p>
+        <p class="prose-para">Taking on a Data Science double major let me explore learning that I truly enjoyed. It took me from learn the basics of python to being a teaching assistant for OOP for about 2 years. I learned how to communicate the technical to non-technical, developed problem solving in myself and others, all while building a community along the way.</p>
+        <p class="prose-para">I stayed on at USC to finish my Master's in Cybersecurity Engineering through my DS degree. I know, big jump but it was well worth it as I conquered understanding computer systems on an infrastructure level all while learning best security practices.</p>
+        <p class="prose-para">My unique background brought me to my perfect fit: product management. Really a role where you get to play entreprenuer simulator and own everything you research and build. I truly enjoyed behind the scenes and making the features users actually touched. I started by doing this back home in Mumbai at Quantech Datascience for a tax compliance app pre-launch and continued it over in LA where I worked with Spin.AI on their cybersecurity platform.</p>
+        <p class="prose-para">The thread through all of it has really been: operating and building with real stakes attached.</p>
+        <p class="prose-para">Right now, I'm in love with building/designing software with Claude Code and Codex. This is curently what I'm focused on, shipping apps I like while also documenting the build, what it looks like to ship a consumer AI product as a solo builder.</p>
+        <p class="prose-para">Looking for product or operations at SF startups where the problem is real.</p>
+        <p class="prose-para">If any of this resonated with you or you just want to talk...</p>
+        <div class="about-links">
+          <div>→ <a class="win-link" href="mailto:navyashah6@gmail.com">navyashah6@gmail.com</a></div>
+          <div>→ <a class="win-link" href="https://linkedin.com/in/navyashah6" target="_blank" rel="noopener">linkedin.com/in/navyashah6</a></div>
+          <div>→ <a class="win-link" href="https://github.com/navyashah" target="_blank" rel="noopener">github.com/navyashah</a></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RESUME card -->
+    <div class="card">
+      <div class="card-titlebar">
+        <span class="card-title">📋 RESUME.exe</span>
+        <div class="card-dot"></div>
+      </div>
+      <div class="card-body">
+        <a class="download-link" href="media/resume.pdf" target="_blank" rel="noopener">&gt; download PDF</a>
+
+        <div class="win-section">Education</div>
+        <div>
+          <div class="entry-company">University of Southern California</div>
+          <div class="entry-meta">los angeles, ca</div>
+          <div style="font-size:15px; margin-bottom:2px;">MS: Cyber Security Engineering, GPA: 3.83 <span style="color:#888">· may 2026</span></div>
+          <div style="font-size:15px;">BA: Economics and Data Science, Minor in Business Law. Cum Laude. <span style="color:#888">· may 2025</span></div>
+        </div>
+
+        <div class="win-section">Experience</div>
+        <div style="margin-bottom:10px;">
+          <div class="entry-company">Spin.AI</div>
+          <div class="entry-meta">product management intern · sept 2025 – present</div>
+          <ul class="entry-bullets">
+            <li>Analyzed 20+ SaaS products to identify feature gaps and built 100+ security control mappings.</li>
+            <li>Defined requirements for a Value-Added Partner security controls feature: assessed how partner configurations would interact with platform-level settings, mapped edge cases, and wrote a BRD.</li>
+            <li>Identified that solutions engineers had to fully log out and back in to switch client accounts; designed the UX flow to resolve it and validated the pain point with customer success before scoping.</li>
+            <li>Collaborated with engineering on acceptance criteria, edge case identification, and sandbox integration.</li>
+          </ul>
+        </div>
+        <div class="win-divider">——</div>
+        <div style="margin-bottom:10px;">
+          <div class="entry-company">Quantech Datascience</div>
+          <div class="entry-meta">operations intern · jun 2025 – aug 2025</div>
+          <ul class="entry-bullets">
+            <li>Evaluated security controls across the database, API layer, file storage, and user management for Ritetax, a tax compliance product handling sensitive financial data for chartered accountant firms.</li>
+            <li>Identified that client data separation was enforced at the UI layer. Tested to confirm unauthorized data access, documented the gap reproducibly, and escalated to engineering for a pre-launch fix.</li>
+            <li>Detected through log analysis that the OCR pipeline silently returned incomplete data. Recommended a post-extraction completeness check that now flags bad scans immediately.</li>
+          </ul>
+        </div>
+        <div class="win-divider">——</div>
+        <div style="margin-bottom:10px;">
+          <div class="entry-company">IREP Credit Capital</div>
+          <div class="entry-meta">financial analyst intern · may 2024 – jul 2024</div>
+          <ul class="entry-bullets">
+            <li>Built SQL-driven loan default tracker analyzing 1,000+ accounts, improving accuracy of risk monitoring by 20%.</li>
+            <li>Synthesized market data into insights that guided portfolio strategy and risk modeling discussions.</li>
+          </ul>
+        </div>
+        <div class="win-divider">——</div>
+        <div style="margin-bottom:10px;">
+          <div class="entry-company">University of Southern California</div>
+          <div class="entry-meta">teaching assistant · aug 2023 – may 2025</div>
+          <ul class="entry-bullets">
+            <li>Supported 100+ students through help sessions and assignment reviews, clarifying coding concepts.</li>
+            <li>Debugged student code in Java OOP assignments, identifying logic errors and edge cases in real time.</li>
+          </ul>
+        </div>
+
+        <div class="win-section">Projects</div>
+        <div style="margin-bottom:10px;">
+          <div class="entry-company">LUCERNA · hacking for defense</div>
+          <ul class="entry-bullets">
+            <li>Led problem definition for an Air Force contracting visibility system: synthesized insights across stakeholder interviews, and defined the system architecture for an LLM-powered Text2SQL pipeline that enables non-technical users to query fragmented contract data in natural language.</li>
+          </ul>
+        </div>
+        <div class="win-divider">——</div>
+        <div style="margin-bottom:10px;">
+          <div class="entry-company">Local · consumer food recommendation app</div>
+          <ul class="entry-bullets">
+            <li>Building a RAG pipeline using pgvector and Supabase to surface hyper-local restaurant recommendations from unstructured data across reviews, ratings, and creator content. React PWA frontend with intent classification and conversation layer powered by Claude.</li>
+          </ul>
+        </div>
+
+        <div class="win-section">Skills</div>
+        <div class="skill-row">
+          <span class="skill-key">certifications</span>
+          <div class="tags-wrap">
+            <span class="tag">CompTIA Security+ (in progress)</span>
+            <span class="tag">Google Cybersecurity Professional Certificate</span>
+          </div>
+        </div>
+        <div class="skill-row">
+          <span class="skill-key">technical</span>
+          <div class="tags-wrap">
+            <span class="tag">Python</span><span class="tag">Java</span><span class="tag">SQL</span>
+            <span class="tag">Linux</span><span class="tag">AWS</span><span class="tag">MongoDB</span>
+            <span class="tag">APIs</span><span class="tag">Node.js</span><span class="tag">JavaScript</span>
+            <span class="tag">React</span><span class="tag">Postgres</span>
+          </div>
+        </div>
+        <div class="skill-row">
+          <span class="skill-key">product / ops</span>
+          <div class="tags-wrap">
+            <span class="tag">Customer Success</span><span class="tag">Implementation</span>
+            <span class="tag">Workflow Design</span><span class="tag">Process Improvement</span>
+            <span class="tag">Cross-Functional Collaboration</span><span class="tag">Feature Definition</span>
+            <span class="tag">Problem Solving</span><span class="tag">Market Research</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROJECTS card -->
+    <div class="card">
+      <div class="card-titlebar">
+        <span class="card-title">⚡ PROJECTS.exe</span>
+        <div class="card-dot"></div>
+      </div>
+      <div class="card-body">
+        <p style="font-size:15px; color:#888; margin-bottom:14px;">here's what i've shipped and worked on.</p>
+
+        <div class="project-entry">
+          <div class="project-name">🥘 local <span class="in-progress-wrap project-case-link">app →</span></div>
+          <div class="project-desc">ai food recommendation app that finds the right place for you, narrows down menu items you'd like and helps you plan with friends.</div>
+          <div class="tags-wrap">
+            <span class="tag">react</span><span class="tag">rag</span><span class="tag">supabase</span>
+            <span class="tag">claude api</span><span class="tag">pgvector</span>
+          </div>
+        </div>
+        <div class="win-divider">——</div>
+        <div class="project-entry">
+          <div class="project-name">⚡️ spin — vap custom controls <a class="project-case-link" href="https://docs.google.com/presentation/d/e/2PACX-1vSlJO_kcigPJuzq4JGRm_VdeaB_Q8_xzUonESna03EkkVC-L5ePXOfNqky93VkYWf4Wxz6or_dHUeUM/pub?start=true&loop=false&delayms=3000" target="_blank" rel="noopener">case study →</a></div>
+          <div class="project-desc">designed a system letting enterprise partners customize security controls at both the configuration and interface level.</div>
+          <div class="tags-wrap">
+            <span class="tag">product design</span><span class="tag">ux</span>
+            <span class="tag">brd</span><span class="tag">saas security</span>
+          </div>
+        </div>
+        <div class="win-divider">——</div>
+        <div class="project-entry">
+          <div class="project-name">🪖 lucerna <a class="project-case-link" href="https://docs.google.com/presentation/d/e/2PACX-1vS376U75ZdgrH64tOyVsI8dDeca4NmwzemmiYp9xb_57Bh3lq03wS7cr4OKxEuvUXVhxQC74-e8pN6r/pub?start=true&loop=false&delayms=3000" target="_blank" rel="noopener">case study →</a></div>
+          <div class="project-desc">US Air Force contracting dashboard with timeline and funding management, powered by an LLM to make complex contract data queryable easily.</div>
+          <div class="tags-wrap">
+            <span class="tag">django</span><span class="tag">react</span><span class="tag">postgres</span>
+            <span class="tag">docker</span><span class="tag">llm</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RESEARCH card -->
+    <div class="card">
+      <div class="card-titlebar">
+        <span class="card-title">📎 RESEARCH.exe</span>
+        <div class="card-dot"></div>
+      </div>
+      <div class="card-body">
+        <div class="research-entry">
+          <div class="research-title">Security Policy Analysis <a class="win-link" href="media/DSCI%20519%20Semester%20Project%20-%20Navya%20Shah.pdf" target="_blank" rel="noopener" style="font-size:14px; margin-left:5px;">pdf →</a></div>
+          <div class="research-desc">Research on organizational security policy design — how policies get written, where they break down in practice, and what makes them actually enforceable versus decorative.</div>
+        </div>
+        <div class="win-divider">——</div>
+        <div class="research-entry">
+          <div class="research-title">Decentralized Key Management <a class="win-link" href="media/Navya%20Shah%20-%20Research%20paper%20CSCI530.pdf" target="_blank" rel="noopener" style="font-size:14px; margin-left:5px;">pdf →</a></div>
+          <div class="research-desc">Cybersecurity engineering paper on decentralized approaches to cryptographic key management. Covers threat models, architecture tradeoffs, and practical implementation considerations.</div>
+        </div>
+        <div class="win-divider">——</div>
+        <div class="research-entry">
+          <div class="research-title">Biometric Authentication Systems <a class="win-link" href="media/Research%20Paper.pdf" target="_blank" rel="noopener" style="font-size:14px; margin-left:5px;">pdf →</a></div>
+          <div class="research-desc">Survey and analysis of biometric authentication — modalities, vulnerabilities, and where current systems fail under real-world conditions.</div>
+        </div>
+        <div class="win-divider">——</div>
+        <div class="research-entry">
+          <div class="research-title">Cybersecurity Case Challenge <a class="win-link" href="media/Company%20Assignment%20Challenge.xlsx" target="_blank" rel="noopener" style="font-size:14px; margin-left:5px;">file →</a></div>
+          <div class="research-desc">Security assessment and strategic recommendation for a real company scenario. Involved threat modeling, gap analysis, and presenting findings.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CONTACT card -->
+    <div class="card">
+      <div class="card-titlebar">
+        <span class="card-title">✉ CONTACT.exe</span>
+        <div class="card-dot"></div>
+      </div>
+      <div class="card-body">
+        <p class="contact-tagline">email is the best way to reach me at <a class="win-link" href="mailto:navyashah6@gmail.com">navyashah6@gmail.com</a></p>
+        <ul class="contact-list">
+          <li><a href="https://linkedin.com/in/navyashah6" target="_blank" rel="noopener">LinkedIn</a></li>
+          <li><a href="https://github.com/navyashah" target="_blank" rel="noopener">GitHub</a></li>
+          <li><a href="media/resume.pdf" target="_blank" rel="noopener">Resume</a></li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer">navyashah.me · 2026</div>
+
+  <script>
+    function updateClock() {
+      const now = new Date();
+      let h = now.getHours();
+      const m = String(now.getMinutes()).padStart(2, '0');
+      const ampm = h >= 12 ? 'PM' : 'AM';
+      h = h % 12 || 12;
+      document.getElementById('mob-clock').textContent = h + ':' + m + ' ' + ampm;
+    }
+    updateClock();
+    setInterval(updateClock, 1000);
+  </script>
+</body>
+</html>
