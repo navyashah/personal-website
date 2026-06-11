@@ -112,10 +112,10 @@
     }
     .sidebar-icon .icon-label {
       font-family: 'Press Start 2P', monospace;
-      font-size: 6px;
+      font-size: 7px;
       color: #888888;
       text-align: center;
-      letter-spacing: 0.03em;
+      letter-spacing: 0.02em;
       line-height: 1.4;
     }
     .sidebar-icon.active .icon-label {
@@ -311,13 +311,19 @@
       font-family: 'Press Start 2P', monospace;
       font-size: 9px;
       color: #FF6B2B;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.06em;
       margin: 22px 0 12px 0;
       padding-bottom: 7px;
       border-bottom: 1px solid #EDE5D8;
     }
     .win-section:first-child { margin-top: 0; }
+
+    .entry-detail {
+      font-size: 21px;
+      line-height: 1.5;
+      margin-bottom: 2px;
+    }
+    .entry-muted { color: #888888; }
 
     .win-divider {
       color: #888888;
@@ -496,6 +502,23 @@
       transform: translateX(-50%) scale(1);
     }
 
+    /* Resize handle */
+    .window-resize {
+      position: absolute;
+      bottom: 0; right: 0;
+      width: 18px; height: 18px;
+      cursor: se-resize;
+      z-index: 10;
+    }
+    .window-resize::after {
+      content: '';
+      position: absolute;
+      bottom: 4px; right: 4px;
+      width: 9px; height: 9px;
+      border-right: 2px solid #C8BAA8;
+      border-bottom: 2px solid #C8BAA8;
+    }
+
     /* Click spark */
     .spark {
       position: fixed;
@@ -625,8 +648,8 @@
         <div>
           <div class="entry-company">University of Southern California</div>
           <div class="entry-meta">los angeles, ca</div>
-          <div style="font-size:15px; margin-bottom:2px;">MS: Cyber Security Engineering, GPA: 3.83 <span style="color:#888888">· may 2026</span></div>
-          <div style="font-size:15px;">BA: Economics and Data Science, Minor in Business Law. Cum Laude. <span style="color:#888888">· may 2025</span></div>
+          <div class="entry-detail">MS: Cyber Security Engineering, GPA: 3.83 <span class="entry-muted">· may 2026</span></div>
+          <div class="entry-detail">BA: Economics and Data Science, Minor in Business Law. Cum Laude. <span class="entry-muted">· may 2025</span></div>
         </div>
 
         <div class="win-section">Experience</div>
@@ -844,41 +867,63 @@
 
     function closeWindow() { openWindow('home'); }
 
-    // Draggable windows
+    // Draggable + resizable windows
+    const mainEl = document.querySelector('.main');
     document.querySelectorAll('.window').forEach(function(win) {
-      const bar = win.querySelector('.window-titlebar');
-      let dragging = false, ox, oy, startL, startT;
+      const bar    = win.querySelector('.window-titlebar');
+      const handle = document.createElement('div');
+      handle.className = 'window-resize';
+      win.appendChild(handle);
 
-      bar.addEventListener('mousedown', function(e) {
-        if (e.target.closest('.window-close')) return;
-        dragging = true;
-        const main = document.querySelector('.main');
+      let mode = null, ox, oy, startL, startT, startW, startH;
+
+      function lockPos() {
+        if (win.style.right === 'auto') return;
         const wr = win.getBoundingClientRect();
-        const mr = main.getBoundingClientRect();
-        // Lock to explicit left/top/width/height, drop right/bottom constraints
+        const mr = mainEl.getBoundingClientRect();
         win.style.left   = (wr.left - mr.left) + 'px';
         win.style.top    = (wr.top  - mr.top)  + 'px';
         win.style.width  = wr.width  + 'px';
         win.style.height = wr.height + 'px';
         win.style.right  = 'auto';
         win.style.bottom = 'auto';
+      }
+
+      bar.addEventListener('mousedown', function(e) {
+        if (e.target.closest('.window-close')) return;
+        lockPos();
+        mode = 'drag';
         ox = e.clientX; oy = e.clientY;
-        startL = wr.left - mr.left;
-        startT = wr.top  - mr.top;
+        startL = parseFloat(win.style.left);
+        startT = parseFloat(win.style.top);
         e.preventDefault();
       });
 
-      document.addEventListener('mousemove', function(e) {
-        if (!dragging) return;
-        const main = document.querySelector('.main');
-        const mr = main.getBoundingClientRect();
-        const newL = Math.max(0, Math.min(startL + e.clientX - ox, mr.width  - win.offsetWidth));
-        const newT = Math.max(0, Math.min(startT + e.clientY - oy, mr.height - win.offsetHeight));
-        win.style.left = newL + 'px';
-        win.style.top  = newT + 'px';
+      handle.addEventListener('mousedown', function(e) {
+        lockPos();
+        mode = 'resize';
+        ox = e.clientX; oy = e.clientY;
+        startW = win.offsetWidth;
+        startH = win.offsetHeight;
+        e.preventDefault();
+        e.stopPropagation();
       });
 
-      document.addEventListener('mouseup', function() { dragging = false; });
+      document.addEventListener('mousemove', function(e) {
+        if (!mode) return;
+        const mr = mainEl.getBoundingClientRect();
+        if (mode === 'drag') {
+          const newL = Math.max(0, Math.min(startL + e.clientX - ox, mr.width  - win.offsetWidth));
+          const newT = Math.max(0, Math.min(startT + e.clientY - oy, mr.height - win.offsetHeight));
+          win.style.left = newL + 'px';
+          win.style.top  = newT + 'px';
+        } else {
+          win.style.width  = Math.max(340, startW + e.clientX - ox) + 'px';
+          win.style.height = Math.max(220, startH + e.clientY - oy) + 'px';
+        }
+      });
+
+      document.addEventListener('mouseup', function() { mode = null; });
     });
 
     // Click spark (desktop bg only)
