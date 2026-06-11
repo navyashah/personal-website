@@ -519,24 +519,46 @@
       border-bottom: 2px solid #C8BAA8;
     }
 
-    /* Click spark */
-    .spark {
+    /* Custom pixel cursor */
+    html, body, * { cursor: none !important; }
+    #pixel-cursor {
       position: fixed;
-      width: 6px; height: 6px;
+      top: 0; left: 0;
+      width: 3px; height: 3px;
       background: #FF6B2B;
-      border-radius: 50%;
       pointer-events: none;
-      transform: translate(-50%, -50%) scale(0);
-      animation: spark-anim 0.4s ease-out forwards;
-      z-index: 9999;
+      z-index: 999999;
+      image-rendering: pixelated;
+      filter: drop-shadow(1px 1px 0px rgba(26,26,26,0.55));
+      box-shadow:
+        0px 3px #FF6B2B, 3px 3px #FF6B2B,
+        0px 6px #FF6B2B, 3px 6px #FF6B2B, 6px 6px #FF6B2B,
+        0px 9px #FF6B2B, 3px 9px #FF6B2B, 6px 9px #FF6B2B, 9px 9px #FF6B2B,
+        0px 12px #FF6B2B, 3px 12px #FF6B2B, 6px 12px #FF6B2B, 9px 12px #FF6B2B, 12px 12px #FF6B2B,
+        0px 15px #FF6B2B, 3px 15px #FF6B2B, 6px 15px #FF6B2B, 9px 15px #FF6B2B, 12px 15px #FF6B2B, 15px 15px #FF6B2B,
+        0px 18px #FF6B2B, 3px 18px #FF6B2B, 6px 18px #FF6B2B, 9px 18px #FF6B2B,
+        0px 21px #FF6B2B, 3px 21px #FF6B2B, 9px 21px #FF6B2B, 12px 21px #FF6B2B,
+        0px 24px #FF6B2B, 12px 24px #FF6B2B, 15px 24px #FF6B2B;
+      will-change: transform;
     }
-    @keyframes spark-anim {
-      0%   { transform: translate(-50%, -50%) scale(0); opacity: 1; }
-      100% { transform: translate(-50%, -50%) scale(4); opacity: 0; }
+
+    /* Pixel click burst */
+    .pixel-spark {
+      position: fixed;
+      width: 4px; height: 4px;
+      background: #FF6B2B;
+      pointer-events: none;
+      z-index: 99998;
+      animation: px-burst 0.38s ease-out forwards;
+    }
+    @keyframes px-burst {
+      0%   { transform: translate(-50%, -50%); opacity: 1; }
+      100% { transform: translate(calc(-50% + var(--tx)), calc(-50% + var(--ty))); opacity: 0; }
     }
   </style>
 </head>
 <body>
+  <div id="pixel-cursor"></div>
 
   <!-- Menubar -->
   <div class="menubar">
@@ -926,15 +948,25 @@
       document.addEventListener('mouseup', function() { mode = null; });
     });
 
-    // Click spark (desktop bg only)
-    document.getElementById('desktop').addEventListener('click', function(e) {
-      if (e.target.closest('.window') || e.target.closest('.photos-wrap') || e.target.closest('.name-block')) return;
-      const s = document.createElement('div');
-      s.className = 'spark';
-      s.style.left = e.clientX + 'px';
-      s.style.top = e.clientY + 'px';
-      document.body.appendChild(s);
-      setTimeout(() => s.remove(), 420);
+    // Pixel cursor tracking
+    const cur = document.getElementById('pixel-cursor');
+    document.addEventListener('mousemove', function(e) {
+      cur.style.transform = 'translate(' + e.clientX + 'px,' + e.clientY + 'px)';
+    });
+
+    // Pixel click burst (everywhere)
+    document.addEventListener('click', function(e) {
+      const dirs = [[-1,-1],[0,-1],[1,-1],[1,0],[1,1],[0,1],[-1,1],[-1,0]];
+      dirs.forEach(function([dx,dy]) {
+        const p = document.createElement('div');
+        p.className = 'pixel-spark';
+        p.style.left = e.clientX + 'px';
+        p.style.top  = e.clientY + 'px';
+        p.style.setProperty('--tx', (dx * 18) + 'px');
+        p.style.setProperty('--ty', (dy * 18) + 'px');
+        document.body.appendChild(p);
+        setTimeout(() => p.remove(), 400);
+      });
     });
 
     // Word-level hover on about prose
