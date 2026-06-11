@@ -1,0 +1,368 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=JetBrains+Mono&display=swap');
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  background: #FAFAF8;
+  color: #1A1A1A;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.75;
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 3.5rem 1.5rem 2.5rem;
+}
+
+a {
+  color: #1A1A1A;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+a:hover {
+  color: #C4622D;
+}
+
+p {
+  margin: 0 0 0.75rem 0;
+}
+
+h1 {
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin: 0 0 0.5rem 0;
+  letter-spacing: -0.01em;
+}
+
+/* --- Photos --- */
+
+.photos {
+  float: right;
+  margin-left: 2.5rem;
+  margin-bottom: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.photo-wrap {
+  position: relative;
+  display: inline-block;
+  line-height: 0;
+}
+
+.photo-wrap::before {
+  content: '';
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-3deg);
+  width: 44px;
+  height: 13px;
+  background: rgba(200, 180, 140, 0.55);
+  z-index: 2;
+}
+
+.photo-wrap:first-child {
+  transform: rotate(-2deg);
+}
+
+.photo-wrap:last-child {
+  transform: rotate(1.5deg);
+}
+
+.photo-wrap img {
+  display: block;
+  width: 180px;
+  height: 230px;
+  object-fit: cover;
+  object-position: center top;
+  box-shadow: 2px 4px 14px rgba(0, 0, 0, 0.18);
+}
+
+/* --- Index page --- */
+
+.bio-block {
+  margin-bottom: 0.25rem;
+}
+
+.bio-block p {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.home-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-top: 2rem;
+  padding: 0;
+  list-style: none;
+}
+
+.home-nav a {
+  text-decoration: none;
+  font-size: 0.95rem;
+  color: #1A1A1A;
+}
+
+.home-nav a:hover {
+  color: #C4622D;
+}
+
+main::after {
+  content: '';
+  display: table;
+  clear: both;
+}
+
+/* --- Subpages --- */
+
+.back-link {
+  display: inline-block;
+  margin-bottom: 2.5rem;
+  color: #6B6B6B;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.back-link:hover {
+  color: #C4622D;
+}
+
+.page-title {
+  margin-bottom: 2rem;
+}
+
+/* --- About prose --- */
+
+.prose p {
+  font-size: 0.95rem;
+  margin-bottom: 1.25rem;
+}
+
+.external-links {
+  margin-top: 1.5rem;
+}
+
+.external-links p {
+  margin: 0.2rem 0;
+  font-size: 0.95rem;
+}
+
+/* --- Work / Builds entries --- */
+
+.entry {
+  margin-bottom: 0.25rem;
+}
+
+.entry .entry-title {
+  font-size: 0.95rem;
+  font-weight: 400;
+  margin: 0 0 0.1rem 0;
+}
+
+.entry .entry-date {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.77rem;
+  color: #6B6B6B;
+  margin: 0 0 0.85rem 0;
+}
+
+.entry .entry-date a {
+  color: inherit;
+}
+
+.entry .entry-date a:hover {
+  color: #C4622D;
+}
+
+.entry p {
+  font-size: 0.95rem;
+  margin: 0 0 0.75rem 0;
+}
+
+.divider {
+  color: #6B6B6B;
+  margin: 1.75rem 0;
+  font-size: 0.9rem;
+}
+
+/* --- Projects page --- */
+
+hr {
+  border: none;
+  border-top: 1px solid #e4e4e0;
+  margin: 2rem 0;
+}
+
+.project-intro {
+  font-size: 0.9rem;
+  color: #6B6B6B;
+  margin-bottom: 2rem;
+}
+
+.project {
+  margin-bottom: 0.25rem;
+}
+
+.project-header {
+  font-size: 0.95rem;
+  margin: 0 0 0.35rem 0;
+}
+
+.project-link {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  color: #6B6B6B;
+  text-decoration: none;
+  margin-left: 0.6rem;
+}
+
+.project-link:hover {
+  color: #C4622D;
+}
+
+.project-desc {
+  font-size: 0.9rem;
+  margin: 0 0 0.6rem 0;
+}
+
+.project-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-bottom: 0.25rem;
+}
+
+.tag {
+  display: inline-block;
+  border: 1px solid #D0C8B8;
+  border-radius: 4px;
+  padding: 2px 8px;
+  font-size: 11px;
+  font-family: 'JetBrains Mono', monospace;
+  color: #6B6B6B;
+}
+
+/* --- Resume --- */
+
+.section-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #6B6B6B;
+  margin: 2.5rem 0 1.25rem 0;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid #e4e4e0;
+}
+
+.resume-download {
+  margin-bottom: 2rem;
+  font-size: 0.95rem;
+}
+
+.resume-download a {
+  text-decoration: none;
+}
+
+.resume-download a:hover {
+  color: #C4622D;
+}
+
+.resume-summary {
+  font-size: 0.95rem;
+  margin-bottom: 0;
+}
+
+.entry ul {
+  margin: 0.35rem 0 0.5rem 1.1rem;
+  padding: 0;
+}
+
+.entry ul li {
+  font-size: 0.9rem;
+  line-height: 1.65;
+  margin-bottom: 0.3rem;
+  color: #1A1A1A;
+}
+
+.skill-line {
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+.skill-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.77rem;
+  color: #6B6B6B;
+}
+
+/* --- Contact --- */
+
+.contact-intro p {
+  font-size: 0.95rem;
+  margin-bottom: 1.25rem;
+}
+
+.contact-links {
+  margin: 1.5rem 0 1rem;
+}
+
+.contact-links p {
+  margin: 0.15rem 0;
+  font-size: 0.95rem;
+}
+
+.resume-link {
+  margin-top: 1.25rem;
+  font-size: 0.95rem;
+}
+
+.resume-link a {
+  text-decoration: none;
+}
+
+.resume-link a:hover {
+  color: #C4622D;
+}
+
+/* --- Footer --- */
+
+footer {
+  margin-top: 4rem;
+  font-size: 0.8rem;
+  color: #6B6B6B;
+}
+
+footer p {
+  margin: 0;
+}
+
+/* --- Mobile --- */
+
+@media (max-width: 600px) {
+  body {
+    padding: 2rem 1.25rem 2rem;
+  }
+
+  .photos {
+    float: none;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 0;
+    margin-bottom: 1.75rem;
+  }
+
+  .photo-wrap img {
+    width: 150px;
+    height: 190px;
+  }
+
+  .home-nav {
+    gap: 1rem;
+  }
+}
