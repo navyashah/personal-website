@@ -161,11 +161,11 @@
     .photo-item:first-child {
       transform: rotate(-2.5deg);
       z-index: 2;
-      margin-right: -20px;
+      margin-right: -26px;
     }
     .photo-item:last-child {
       transform: rotate(2deg);
-      margin-top: 24px;
+      margin-top: 30px;
       z-index: 1;
     }
     .photo-item:hover {
@@ -183,7 +183,7 @@
     }
     .photo-item img {
       display: block;
-      width: 145px; height: 182px;
+      width: 190px; height: 238px;
       object-fit: cover;
       object-position: center top;
       box-shadow: 2px 4px 12px rgba(0,0,0,0.12);
@@ -223,17 +223,17 @@
     }
     .name-block h1 {
       font-family: 'Press Start 2P', monospace;
-      font-size: 18px;
+      font-size: 22px;
       color: #1A1A1A;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
       line-height: 1.5;
     }
     .bio-line {
       display: block;
       font-family: 'VT323', monospace;
-      font-size: 22px;
+      font-size: 26px;
       color: #1A1A1A;
-      line-height: 1.45;
+      line-height: 1.4;
     }
     .bio-line a {
       color: #FF6B2B;
@@ -244,7 +244,7 @@
     /* ── Windows ── */
     .window {
       position: absolute;
-      top: 10px; left: 10px; right: 310px; bottom: 170px;
+      top: 10px; left: 10px; right: 420px; bottom: 200px;
       background: #FFFCF7;
       border: 1px solid #EDE5D8;
       border-radius: 6px;
@@ -265,6 +265,8 @@
       justify-content: space-between;
       padding: 0 14px;
       flex-shrink: 0;
+      cursor: move;
+      user-select: none;
     }
     .window-title {
       font-family: 'Press Start 2P', monospace;
@@ -297,8 +299,8 @@
       overflow-y: auto;
       padding: 20px 24px;
       font-family: 'VT323', monospace;
-      font-size: 20px;
-      line-height: 1.65;
+      font-size: 22px;
+      line-height: 1.6;
     }
     .window-body::-webkit-scrollbar { width: 4px; }
     .window-body::-webkit-scrollbar-track { background: #FFFCF7; }
@@ -324,20 +326,20 @@
     }
 
     .entry-company {
-      font-size: 21px;
+      font-size: 23px;
       font-weight: bold;
       color: #1A1A1A;
       line-height: 1.3;
     }
     .entry-meta {
-      font-size: 17px;
+      font-size: 19px;
       color: #888888;
       margin-bottom: 5px;
     }
     .entry-bullets {
       list-style: disc;
       padding-left: 20px;
-      font-size: 18px;
+      font-size: 20px;
       line-height: 1.6;
     }
     .entry-bullets li { margin-bottom: 2px; }
@@ -369,7 +371,7 @@
       border-radius: 100px;
       padding: 1px 10px;
       font-family: 'VT323', monospace;
-      font-size: 16px;
+      font-size: 19px;
       color: #888888;
     }
 
@@ -391,8 +393,8 @@
     /* About prose / word hover */
     .prose-para {
       margin-bottom: 14px;
-      font-size: 20px;
-      line-height: 1.7;
+      font-size: 22px;
+      line-height: 1.65;
     }
     .word { transition: color 0.9s ease; }
     .word:hover {
@@ -826,7 +828,10 @@
         closeWindow();
         return;
       }
-      document.querySelectorAll('.window').forEach(w => w.classList.remove('open'));
+      document.querySelectorAll('.window').forEach(function(w) {
+        w.classList.remove('open');
+        w.style.cssText = ''; // reset any drag positioning
+      });
       document.querySelectorAll('.sidebar-icon').forEach(i => i.classList.remove('active'));
       current = name;
       if (name !== 'home') {
@@ -838,6 +843,43 @@
     }
 
     function closeWindow() { openWindow('home'); }
+
+    // Draggable windows
+    document.querySelectorAll('.window').forEach(function(win) {
+      const bar = win.querySelector('.window-titlebar');
+      let dragging = false, ox, oy, startL, startT;
+
+      bar.addEventListener('mousedown', function(e) {
+        if (e.target.closest('.window-close')) return;
+        dragging = true;
+        const main = document.querySelector('.main');
+        const wr = win.getBoundingClientRect();
+        const mr = main.getBoundingClientRect();
+        // Lock to explicit left/top/width/height, drop right/bottom constraints
+        win.style.left   = (wr.left - mr.left) + 'px';
+        win.style.top    = (wr.top  - mr.top)  + 'px';
+        win.style.width  = wr.width  + 'px';
+        win.style.height = wr.height + 'px';
+        win.style.right  = 'auto';
+        win.style.bottom = 'auto';
+        ox = e.clientX; oy = e.clientY;
+        startL = wr.left - mr.left;
+        startT = wr.top  - mr.top;
+        e.preventDefault();
+      });
+
+      document.addEventListener('mousemove', function(e) {
+        if (!dragging) return;
+        const main = document.querySelector('.main');
+        const mr = main.getBoundingClientRect();
+        const newL = Math.max(0, Math.min(startL + e.clientX - ox, mr.width  - win.offsetWidth));
+        const newT = Math.max(0, Math.min(startT + e.clientY - oy, mr.height - win.offsetHeight));
+        win.style.left = newL + 'px';
+        win.style.top  = newT + 'px';
+      });
+
+      document.addEventListener('mouseup', function() { dragging = false; });
+    });
 
     // Click spark (desktop bg only)
     document.getElementById('desktop').addEventListener('click', function(e) {
