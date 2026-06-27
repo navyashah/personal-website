@@ -367,6 +367,82 @@
       transform: translateX(-50%) scale(1);
     }
 
+    /* ── Sticky note (mobile) ── */
+    .sticky-note {
+      display: block;
+      text-decoration: none;
+      background: #FFE48A;
+      margin: 18px 8px 2px;
+      padding: 16px 16px 15px;
+      transform: rotate(-1.4deg);
+      box-shadow: 2px 5px 14px rgba(0,0,0,0.16);
+      position: relative;
+      animation: note-drop 0.5s cubic-bezier(0.2,0.8,0.3,1.2) both;
+    }
+    .sticky-note::before {
+      content: '';
+      position: absolute;
+      top: -10px; left: 50%;
+      transform: translateX(-50%) rotate(-3deg);
+      width: 62px; height: 20px;
+      background: rgba(255,107,43,0.32);
+      border-left: 1px dashed rgba(255,107,43,0.55);
+      border-right: 1px dashed rgba(255,107,43,0.55);
+    }
+    @keyframes note-drop {
+      0%   { opacity: 0; transform: rotate(-1.4deg) translateY(-12px) scale(0.95); }
+      100% { opacity: 1; transform: rotate(-1.4deg) translateY(0) scale(1); }
+    }
+    .sticky-live {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-family: 'Press Start 2P', monospace;
+      font-size: 6px;
+      color: #D8350A;
+      letter-spacing: 0.08em;
+      margin-bottom: 9px;
+    }
+    .sticky-live .live-dot {
+      width: 7px; height: 7px;
+      background: #FF3B30;
+      border-radius: 50%;
+      animation: pulse 1.4s ease-in-out infinite;
+    }
+    .sticky-head {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 9px;
+      color: #1A1A1A;
+      line-height: 1.5;
+      margin-bottom: 7px;
+    }
+    .sticky-body {
+      font-family: 'VT323', monospace;
+      font-size: 16px;
+      color: #5A4A1E;
+      line-height: 1.3;
+      margin-bottom: 9px;
+    }
+    .sticky-cta {
+      font-family: 'VT323', monospace;
+      font-size: 17px;
+      color: #D8350A;
+    }
+    .live-pill {
+      display: inline-block;
+      font-family: 'Press Start 2P', monospace;
+      font-size: 5px;
+      color: #fff;
+      background: #FF3B30;
+      padding: 3px 5px 2px;
+      border-radius: 3px;
+      letter-spacing: 0.1em;
+      vertical-align: middle;
+      margin-left: 5px;
+      position: relative;
+      top: -1px;
+    }
+
     /* ── Footer ── */
     .footer {
       text-align: center;
@@ -389,11 +465,19 @@
     </div>
     <div class="ticker">
       <div class="ticker-track">
-        <span>PRODUCT &amp; OPS · BUILDING LOCAL · SPIN.AI · USC '26 · LOS ANGELES · OPEN TO WORK · </span>
-        <span>PRODUCT &amp; OPS · BUILDING LOCAL · SPIN.AI · USC '26 · LOS ANGELES · OPEN TO WORK · </span>
+        <span>★ LOCAL WAITLIST NOW LIVE · PRODUCT &amp; OPS · BUILDING LOCAL · SPIN.AI · USC '26 · LOS ANGELES · OPEN TO WORK · </span>
+        <span>★ LOCAL WAITLIST NOW LIVE · PRODUCT &amp; OPS · BUILDING LOCAL · SPIN.AI · USC '26 · LOS ANGELES · OPEN TO WORK · </span>
       </div>
     </div>
   </div>
+
+  <!-- Sticky note: Local waitlist live -->
+  <a class="sticky-note" href="https://eatwithlocal.com/" target="_blank" rel="noopener">
+    <span class="sticky-live"><span class="live-dot"></span>NOW LIVE</span>
+    <div class="sticky-head">Local is here! 🥘</div>
+    <div class="sticky-body">Join the waitlist for the AI app that finds your next favorite meal.</div>
+    <span class="sticky-cta">→ eatwithlocal.com</span>
+  </a>
 
   <div class="cards">
 
@@ -559,8 +643,8 @@
         <p style="font-size:15px; color:#888; margin-bottom:14px;">Here's what i've shipped and worked on.</p>
 
         <div class="project-entry">
-          <div class="project-name">🥘 Local <span class="in-progress-wrap project-case-link">app →</span></div>
-          <div class="project-desc">AI food recommendation app that finds the right place for you, narrows down menu items you'd like and helps you plan with friends.</div>
+          <div class="project-name">🥘 Local <a class="project-case-link" href="https://eatwithlocal.com/" target="_blank" rel="noopener">join waitlist →</a> <span class="live-pill">LIVE</span></div>
+          <div class="project-desc">AI food recommendation app that finds the right place for you, narrows down menu items you'd like and helps you plan with friends. Waitlist now open at <a class="win-link" href="https://eatwithlocal.com/" target="_blank" rel="noopener">eatwithlocal.com</a>.</div>
           <div class="tags-wrap">
             <span class="tag">react</span><span class="tag">rag</span><span class="tag">supabase</span>
             <span class="tag">claude api</span><span class="tag">pgvector</span>

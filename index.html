@@ -555,6 +555,101 @@
       0%   { transform: translate(-50%, -50%); opacity: 1; }
       100% { transform: translate(calc(-50% + var(--tx)), calc(-50% + var(--ty))); opacity: 0; }
     }
+
+    /* ── Sticky note (desktop) ── */
+    .sticky-note {
+      position: absolute;
+      top: 52px; left: 64px;
+      width: 232px;
+      background: #FFE48A;
+      padding: 18px 18px 16px;
+      transform: rotate(-3.5deg);
+      box-shadow: 3px 7px 16px rgba(0,0,0,0.18);
+      z-index: 15;
+      text-decoration: none;
+      display: block;
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+      animation: note-drop 0.5s cubic-bezier(0.2,0.8,0.3,1.2) both;
+    }
+    .sticky-note:hover {
+      transform: rotate(-1deg) scale(1.04);
+      box-shadow: 5px 11px 24px rgba(0,0,0,0.24);
+    }
+    /* washi tape */
+    .sticky-note::before {
+      content: '';
+      position: absolute;
+      top: -11px; left: 50%;
+      transform: translateX(-50%) rotate(-4deg);
+      width: 66px; height: 22px;
+      background: rgba(255,107,43,0.32);
+      border-left: 1px dashed rgba(255,107,43,0.55);
+      border-right: 1px dashed rgba(255,107,43,0.55);
+    }
+    @keyframes note-drop {
+      0%   { opacity: 0; transform: rotate(-3.5deg) translateY(-14px) scale(0.94); }
+      100% { opacity: 1; transform: rotate(-3.5deg) translateY(0) scale(1); }
+    }
+    .sticky-live {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-family: 'Press Start 2P', monospace;
+      font-size: 7px;
+      color: #D8350A;
+      letter-spacing: 0.08em;
+      margin-bottom: 10px;
+    }
+    .sticky-live .live-dot {
+      width: 7px; height: 7px;
+      background: #FF3B30;
+      border-radius: 50%;
+      box-shadow: 0 0 0 0 rgba(255,59,48,0.6);
+      animation: live-ping 1.5s ease-out infinite;
+    }
+    @keyframes live-ping {
+      0%   { box-shadow: 0 0 0 0 rgba(255,59,48,0.55); }
+      70%  { box-shadow: 0 0 0 7px rgba(255,59,48,0); }
+      100% { box-shadow: 0 0 0 0 rgba(255,59,48,0); }
+    }
+    .sticky-head {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 11px;
+      color: #1A1A1A;
+      line-height: 1.5;
+      margin-bottom: 9px;
+    }
+    .sticky-body {
+      font-family: 'VT323', monospace;
+      font-size: 19px;
+      color: #5A4A1E;
+      line-height: 1.25;
+      margin-bottom: 11px;
+    }
+    .sticky-cta {
+      display: inline-block;
+      font-family: 'VT323', monospace;
+      font-size: 20px;
+      color: #D8350A;
+      letter-spacing: 0.01em;
+    }
+    .sticky-note:hover .sticky-cta { text-decoration: underline; }
+
+    /* Live pill */
+    .live-pill {
+      display: inline-block;
+      font-family: 'Press Start 2P', monospace;
+      font-size: 6px;
+      color: #fff;
+      background: #FF3B30;
+      padding: 4px 6px 3px;
+      border-radius: 3px;
+      letter-spacing: 0.1em;
+      vertical-align: middle;
+      margin-left: 6px;
+      position: relative;
+      top: -2px;
+    }
   </style>
 </head>
 <body>
@@ -629,6 +724,14 @@
       <span class="bio-line">Building <span class="in-progress-wrap">Local</span>, currently at <a href="https://spin.ai" target="_blank" rel="noopener">Spin.AI</a></span>
       <span class="bio-line">📍 Los Angeles, open to relocate</span>
     </div>
+
+    <!-- Sticky note: Local waitlist live -->
+    <a class="sticky-note" href="https://eatwithlocal.com/" target="_blank" rel="noopener">
+      <span class="sticky-live"><span class="live-dot"></span>NOW LIVE</span>
+      <div class="sticky-head">Local is<br>here! 🥘</div>
+      <div class="sticky-body">Join the waitlist for the AI app that finds your next favorite meal.</div>
+      <span class="sticky-cta">→ eatwithlocal.com</span>
+    </a>
 
     <!-- ABOUT window -->
     <div class="window" id="win-about">
@@ -771,8 +874,8 @@
         <p style="color:#888888; margin-bottom:18px; font-size:21px;">Here's what I've shipped and worked on.</p>
 
         <div class="project-entry">
-          <div class="project-name">🥘 Local <span class="in-progress-wrap project-case-link">app →</span></div>
-          <div class="project-desc">AI food recommendation app that finds the right place for you, narrows down menu items you'd like and helps you plan with friends.</div>
+          <div class="project-name">🥘 Local <a class="project-case-link" href="https://eatwithlocal.com/" target="_blank" rel="noopener">join waitlist →</a> <span class="live-pill">LIVE</span></div>
+          <div class="project-desc">AI food recommendation app that finds the right place for you, narrows down menu items you'd like and helps you plan with friends. Waitlist now open at <a class="win-link" href="https://eatwithlocal.com/" target="_blank" rel="noopener">eatwithlocal.com</a>.</div>
           <div class="tags-wrap">
             <span class="tag">React</span><span class="tag">RAG</span><span class="tag">Supabase</span>
             <span class="tag">Claude API</span><span class="tag">pgvector</span>
