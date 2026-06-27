@@ -542,6 +542,22 @@
       will-change: transform;
     }
 
+    /* Cursor trail */
+    .cursor-trail {
+      position: fixed;
+      width: 6px; height: 6px;
+      background: #FF6B2B;
+      pointer-events: none;
+      z-index: 99997;
+      transform: translate(-50%, -50%);
+      animation: trail-fade 0.5s linear forwards;
+      image-rendering: pixelated;
+    }
+    @keyframes trail-fade {
+      0%   { opacity: 0.55; transform: translate(-50%, -50%) scale(1); }
+      100% { opacity: 0;    transform: translate(-50%, -50%) scale(0.3); }
+    }
+
     /* Pixel click burst */
     .pixel-spark {
       position: fixed;
@@ -1051,10 +1067,24 @@
       document.addEventListener('mouseup', function() { mode = null; });
     });
 
-    // Pixel cursor tracking
+    // Pixel cursor tracking + trail
     const cur = document.getElementById('pixel-cursor');
+    let trailX = null, trailY = null;
     document.addEventListener('mousemove', function(e) {
       cur.style.transform = 'translate(' + e.clientX + 'px,' + e.clientY + 'px)';
+
+      // drop a fading pixel every few px of travel, trailing the arrow body
+      if (trailX === null) { trailX = e.clientX; trailY = e.clientY; }
+      const dx = e.clientX - trailX, dy = e.clientY - trailY;
+      if (dx * dx + dy * dy >= 64) {
+        trailX = e.clientX; trailY = e.clientY;
+        const t = document.createElement('div');
+        t.className = 'cursor-trail';
+        t.style.left = (e.clientX + 5) + 'px';
+        t.style.top  = (e.clientY + 7) + 'px';
+        document.body.appendChild(t);
+        setTimeout(() => t.remove(), 500);
+      }
     });
 
     // Pixel click burst (everywhere)
