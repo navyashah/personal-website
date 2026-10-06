@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Caught before launch · Navya Shah</title>
+  <meta name="description" content="Three problems I found early at Spin.AI and Quantech, and got fixed.">
+  <link rel="icon" type="image/png" href="../media/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400..600;1,6..72,400..600&family=Hanken+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/site.css">
+  <link rel="stylesheet" href="../assets/css/demos.css">
+  <link rel="stylesheet" href="../assets/css/case.css">
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<header class="nav">
+  <a class="nav-home" href="../index.html"><span class="up">../</span>Navya Shah</a>
+  <nav class="nav-links" aria-label="Main">
+    <a href="../index.html#work">Work</a>
+    <a href="../index.html#about">About</a>
+    <a href="../index.html#contact">Contact</a>
+  </nav>
+</header>
+<main id="content" class="case-page">
+<div class="case-head">
+  <div>
+    <p class="kicker">04 · Spin.AI and Quantech</p>
+    <h1>Caught before launch</h1>
+    <p class="cat">Product and security · 2025–2026</p>
+  </div>
+  <a class="badge try" data-text="Try it" href="#api" aria-label="Jump to the data separation demo"></a>
+</div>
+<div class="case">
+  <nav class="toc" aria-label="On this page">
+    <a class="back" href="../index.html#work">← All work</a>
+    <ol>
+      <li><a href="#intro">Introduction</a></li>
+      <li><a href="#spin">Spin.AI</a></li>
+      <li><a href="#api">Data separation</a></li>
+      <li><a href="#ocr">Silent OCR failure</a></li>
+      <li><a href="#share">What they share</a></li>
+    </ol>
+  </nav>
+  <article class="case-body">
+    <section id="intro" aria-labelledby="intro-title">
+      
+      
+      <p class="lede">Before Ren, I spent two internships on product teams at security-minded startups. The parts I’m proudest of are the times I noticed something was wrong before a customer did, and got it fixed while it was still cheap to fix. Everything below is redrawn generically.</p>
+      <dl class="facts-row"><div><dt>Spin.AI</dt><dd>Product Management Intern, Sep 2025 – Jun 2026</dd></div><div><dt>Quantech Datascience</dt><dd>Product Operations Intern, Jun – Aug 2025</dd></div></dl>
+    </section>
+    <section id="spin" aria-labelledby="spin-title">
+      <span class="eyebrow">Spin.AI</span>
+      <h2 class="statement" id="spin-title">Switching client accounts meant logging out</h2>
+      <p>Spin.AI protects Google Workspace and Microsoft 365 from data loss. Solutions engineers had to log out and back in to switch between client accounts. I confirmed with customer success that it was a real, repeated pain, then designed the in-app switcher that became the fix. Try both:</p>
+      <div class="demo switch-demo ui" id="switch-demo" data-state="before">
+        <div class="demo-head">
+          <div class="seg" role="group" aria-label="Version" data-seg-target="switch-demo">
+            <button type="button" data-value="before" aria-pressed="true">Before</button>
+            <button type="button" data-value="after" aria-pressed="false">After</button>
+          </div>
+          <span class="demo-note">Generic redraw</span>
+        </div>
+        <div class="demo-body sw-body">
+          <p class="demo-hint">Get from Client A to Client B.</p>
+          <div class="sw-screen" aria-live="polite"></div>
+          <p class="sw-count"></p>
+        </div>
+      </div>
+
+      <p style="margin-top:24px">The rest of my time at Spin was bigger, slower work. I defined requirements for a partner controls feature, mapped how a partner’s configuration would interact with platform settings, and wrote the BRD engineering built from. I also analyzed more than 20 SaaS products and built over 100 security control mappings that fed the roadmap and the controls library partners use.</p>
+    </section>
+    <section id="api" aria-labelledby="api-title">
+      <span class="eyebrow">Quantech</span>
+      <h2 class="statement" id="api-title">Client data was only kept apart by the screen</h2>
+      <p>Quantech builds tax software for accounting firms that handle sensitive client data. Before launch, I noticed firms were only kept apart by the screen, not by the system behind it. I proved it through the API, documented it, and engineering fixed it before launch. Try both routes:</p>
+      <div class="demo api-demo ui" id="api-demo" data-state="before">
+        <div class="demo-head">
+          <div class="seg" role="group" aria-label="Version" data-seg-target="api-demo">
+            <button type="button" data-value="before" aria-pressed="true">Before the fix</button>
+            <button type="button" data-value="after" aria-pressed="false">After the fix</button>
+          </div>
+          <span class="demo-note">Generic redraw</span>
+        </div>
+        <div class="demo-body">
+          <p class="demo-hint">You’re signed in as Firm A. Try to open Firm B’s client records two ways.</p>
+          <div class="api-actions">
+            <button type="button" class="btn ghost small" data-route="app">Through the app</button>
+            <button type="button" class="btn ghost small" data-route="api">Straight to the API</button>
+          </div>
+          <div class="api-flow" aria-hidden="true">
+            <div class="api-node you">Firm A user</div>
+            <div class="api-link l1"><span class="pkt"></span></div>
+            <div class="api-node ui-node">App interface<small>hides Firm B</small></div>
+            <div class="api-link l2"><span class="pkt"></span></div>
+            <div class="api-node srv">API<small class="srv-note">no check</small></div>
+            <div class="api-link l3"><span class="pkt"></span></div>
+            <div class="api-node db">Client records<small>Firm A · Firm B</small></div>
+          </div>
+          <p class="api-result" aria-live="polite">Pick a route.</p>
+        </div>
+      </div>
+    </section>
+    <section id="ocr" aria-labelledby="ocr-title">
+      <span class="eyebrow">Quantech</span>
+      <h2 class="statement" id="ocr-title">A scan that failed without saying so</h2>
+      <p>In the logs, I found scans that came back incomplete without any error, so bad data looked like good data. I specified a check right after scanning that tells the user immediately.</p>
+      <div class="ocr-flow" aria-label="Scan, extract, then a completeness check that either continues or flags the scan"><span>Upload</span><i>→</i><span>OCR extract</span><i>→</i><span class="check">Completeness check</span><i>→</i><span class="split"><b>Complete</b> continue<br><b>Incomplete</b> flag to the user</span></div>
+    </section>
+    <section id="share" aria-labelledby="share-title">
+      
+      <h2 class="statement" id="share-title">What they share</h2>
+      <p>In each case the fix was small because it came early. My cybersecurity background is a big part of why I go looking: I want to know what the system actually does, not just what the screen shows.</p>
+    </section>
+
+  </article>
+</div>
+<div class="next-case"><a href="ren.html"><span><span class="label">Back to the start</span><span class="t">Ren app redesign</span></span><span class="arrow" aria-hidden="true">→</span></a></div>
+
+</main>
+<script src="../assets/js/site.js"></script>
+<script src="../assets/js/demos.js"></script>
+</body>
+</html>

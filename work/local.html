@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Local · Navya Shah</title>
+  <meta name="description" content="Local is an AI app I'm building that gives one confident restaurant pick, built from what critics, locals and creators say.">
+  <link rel="icon" type="image/png" href="../media/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400..600;1,6..72,400..600&family=Hanken+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/site.css">
+  <link rel="stylesheet" href="../assets/css/demos.css">
+  <link rel="stylesheet" href="../assets/css/case.css">
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<header class="nav">
+  <a class="nav-home" href="../index.html"><span class="up">../</span>Navya Shah</a>
+  <nav class="nav-links" aria-label="Main">
+    <a href="../index.html#work">Work</a>
+    <a href="../index.html#about">About</a>
+    <a href="../index.html#contact">Contact</a>
+  </nav>
+</header>
+<main id="content" class="case-page">
+<div class="case-head">
+  <div>
+    <p class="kicker">03 · Solo builder</p>
+    <h1>Local</h1>
+    <p class="cat">My own app, AI and iOS · 2026</p>
+  </div>
+  <a class="badge" data-text="Live site" href="https://eatwithlocal.com" target="_blank" rel="noopener" aria-label="Open eatwithlocal.com in a new tab"></a>
+</div>
+<div class="case-hero"><div class="panel" style="--t1:#F6E7B8;--t2:#F3D6C9"><img src="../media/local/hero.webp" alt="eatwithlocal.com: Your next meal, decided." fetchpriority="high" decoding="async" width="2880" height="1800"></div></div>
+<div class="case">
+  <nav class="toc" aria-label="On this page">
+    <a class="back" href="../index.html#work">← All work</a>
+    <ol>
+      <li><a href="#intro">Introduction</a></li>
+      <li><a href="#problem">The problem</a></li>
+      <li><a href="#app">Inside the app</a></li>
+      <li><a href="#how">How it works</a></li>
+      <li><a href="#site">The landing page</a></li>
+      <li><a href="#next">What’s next</a></li>
+    </ol>
+  </nav>
+  <article class="case-body">
+    <section id="intro" aria-labelledby="intro-title">
+      
+      
+      <p class="lede">Local is an iOS app I’m building on my own. You ask for food the way you’d text a friend, and it answers with one confident pick, two backups, and what to order, built from what the city actually says about each place.</p>
+      <dl class="facts-row"><div><dt>Role</dt><dd>Solo builder: product, design, build</dd></div><div><dt>Timeline</dt><dd>March 2026 to now</dd></div><div><dt>Stack</dt><dd>React Native, Supabase, Postgres with pgvector, Claude API</dd></div><div><dt>Status</dt><dd>Private beta in LA, waitlist live</dd></div></dl>
+    </section>
+    <section id="problem" aria-labelledby="problem-title">
+      <span class="eyebrow">The problem</span>
+      <h2 class="statement" id="problem-title">Deciding where to eat shouldn’t take an hour of reviews</h2>
+      <p>Picking a place is a small decision that eats a lot of time. You check a map, then the reviews, then a list someone posted, then a video, and you still end up somewhere fine.</p>
+      <div class="cards "><div class="card"><span class="ic" aria-hidden="true">★</span><h4>Ratings flatten everything</h4><p>A 4.6 tells you nothing about whether it’s quiet enough to talk, or what to order.</p></div><div class="card"><span class="ic" aria-hidden="true">↯</span><h4>The good stuff is scattered</h4><p>Critics, Reddit threads and creators all know things, but they live in different places.</p></div><div class="card"><span class="ic" aria-hidden="true">?</span><h4>“Somewhere good” means a dozen things</h4><p>Date night, a group of eight, one vegetarian: the right answer depends on who’s asking.</p></div></div>
+      <div class="hmw"><span class="eyebrow">Design opportunity</span><p class="big">How might we turn everything a city says about its restaurants into one pick you can trust, for exactly what you want tonight?</p></div>
+    </section>
+    <section id="app" aria-labelledby="app-title">
+      <span class="eyebrow">Inside the app</span>
+      <h2 class="statement" id="app-title">Every screen, in the order you’d meet it</h2>
+      <p>Local has three tabs, Home, Map and Saved, and it ships in light and dark mode. The screens below are real, from the beta, and they mix both modes.</p>
+      <div class="sub"><h3>Opening the app</h3>
+<p>Home asks one question, based on the time of day, like “dinner tonight?” or “something sweet?” late at night. One button makes the call, and the chips underneath cover everything else.</p>
+<div class="devices c2"><figure class="device"><img src="../media/local/app/open-dinner.webp" alt="Home in the evening: dinner tonight?" loading="lazy" decoding="async" width="1206" height="2622"><figcaption><span class="mode light">Light</span>Evening</figcaption></figure><figure class="device"><img src="../media/local/app/open-sweet.webp" alt="Home late at night: something sweet?" loading="lazy" decoding="async" width="1206" height="2622"><figcaption><span class="mode light">Light</span>Late night</figcaption></figure></div>
+</div>
+      <div class="sub"><h3>Telling Local your taste, once</h3>
+<p>Not every preference is equal, so taste has three levels: hard lines that are never broken (like allergies), dislikes Local avoids when it can, and boosts that make a pick feel made for you.</p>
+<div class="devices c3"><figure class="device"><img src="../media/local/app/taste-hardlines.webp" alt="Hard lines: allergies and restrictions" loading="lazy" decoding="async" width="1206" height="2622"><figcaption><span class="mode light">Light</span>Hard lines</figcaption></figure><figure class="device"><img src="../media/local/app/taste-flexible.webp" alt="Flexible dislikes and boosts" loading="lazy" decoding="async" width="1206" height="2622"><figcaption><span class="mode light">Light</span>Flexible dislikes and boosts</figcaption></figure></div>
+</div>
+      <div class="sub"><h3>Asking</h3>
+<p>You can tap where, cuisine and occasion, or just type it like a text. Follow-ups work like a conversation, “what about something with meat? my friends aren’t vegetarian”, and when nothing fits, Local says so instead of forcing a pick.</p>
+<div class="devices c4"><figure class="device"><img src="../media/local/app/ask-chips.webp" alt="Choosing where, cuisine and occasion" loading="lazy" decoding="async" width="1206" height="2622"><figcaption><span class="mode light">Light</span>Tap to ask</figcaption></figure><figure class="device"><img src="../media/local/app/ask-chat-dark.webp" alt="A conversation with follow-ups" loading="lazy" decoding="async" width="1206" height="2622"><figcaption><span class="mode dark">Dark</span>Follow-ups</figcaption></figure><figure class="device"><img src="../media/local/app/ask-answer-dark.webp" alt="An answer with the pick card" loading="lazy" decoding="async" width="1206" height="2622"><figcaption><span class="mode dark">Dark</span>The answer</figcaption></figure><figure class="device"><img src="../media/local/app/ask-pick-light.webp" alt="A pick in light mode" loading="lazy" decoding="async" width="1206" height="2622"><figcaption><span class="mode light">Light</span>Same thing, light</figcaption></figure></div>
+</div>
+      <div class="sub"><h3>One pick, two backups</h3>
+<p>Instead of a list of twenty, Local makes one call, with #2 and #3 a swipe away. Each card tells you what to order and one practical tip.</p>
+<div class="devices c3"><figure class="device"><img src="../media/local/app/pick-1.webp" alt="The local pick" loading="lazy" decoding="async" width="1206" height="2622"><figcaption><span class="mode dark">Dark</span>The pick</figcaption></figure><figure class="device"><img src="../media/local/app/pick-2.webp" alt="The number two pick" loading="lazy" decoding="async" width="1206" height="2622"><figcaption><span class="mode dark">Dark</span>#2</figcaption></figure><figure class="device"><img src="../media/local/app/pick-3.webp" alt="The number three pick" loading="lazy" decoding="async" width="1206" height="2622"><figcaption><span class="mode dark">Dark</span>#3</figcaption></figure></div>
+</div>
+      <div class="sub"><h3>The place, in detail</h3>
+<p>Opening a place shows what to order from the menu, what it’s good for, parking, and why it fits you. When Local can’t confirm something, it says so plainly, like “vegetarian fit is not verified yet”. I’d rather it admit a gap than guess about someone’s diet.</p>
+<div class="devices c3"><figure class="device"><img src="../media/local/app/detail-yuko.webp" alt="Place detail with what to order and parking" loading="lazy" decoding="async" width="1206" height="2622"><figcaption><span class="mode dark">Dark</span>What to order</figcaption></figure><figure class="device"><img src="../media/local/app/detail-softies.webp" alt="Place detail flagging an unverified vegetarian fit" loading="lazy" decoding="async" width="1206" height="2622"><figcaption><span class="mode dark">Dark</span>Honest about gaps</figcaption></figure><figure class="device"><img src="../media/local/app/detail-qin.webp" alt="Place detail in light mode" loading="lazy" decoding="async" width="1206" height="2622"><figcaption><span class="mode light">Light</span>Light mode</figcaption></figure></div>
+</div>
+      <div class="sub"><h3>Planning with friends</h3>
+<p>Picking for a group is the hardest case, so it has its own flow. Everyone shares their must-knows, and Local finds one place that works for the whole table. Scroll sideways for each step.</p>
+<div class="shelf" tabindex="0" aria-label="Scroll sideways for more screens"><figure class="device"><img src="../media/local/app/group-invite.webp" alt="Sending the taste check invite link" loading="lazy" decoding="async" width="1206" height="2622"><figcaption><span class="mode dark">Dark</span>1 · Send the taste check</figcaption></figure><figure class="device"><img src="../media/local/app/group-essentials.webp" alt="Setting the essentials for each person" loading="lazy" decoding="async" width="1206" height="2622"><figcaption><span class="mode light">Light</span>2 · Each person’s must-knows</figcaption></figure><figure class="device"><img src="../media/local/app/group-prefs.webp" alt="Group preferences: where, cuisine, vibe, budget" loading="lazy" decoding="async" width="1206" height="2622"><figcaption><span class="mode light">Light</span>3 · Blend the group</figcaption></figure><figure class="device"><img src="../media/local/app/group-result.webp" alt="Local&#x27;s call for the group" loading="lazy" decoding="async" width="1206" height="2622"><figcaption><span class="mode light">Light</span>4 · One call for everyone</figcaption></figure><figure class="device"><img src="../media/local/app/group-map.webp" alt="The group&#x27;s picks on a map" loading="lazy" decoding="async" width="1206" height="2622"><figcaption><span class="mode light">Light</span>5 · List or map</figcaption></figure><figure class="device"><img src="../media/local/app/group-backups.webp" alt="Backups for the group" loading="lazy" decoding="async" width="1206" height="2622"><figcaption><span class="mode light">Light</span>6 · Backups, and re-run</figcaption></figure></div>
+</div>
+      <div class="sub"><h3>Map</h3>
+<p>Every pin carries its Local Score, so the strong spots stand out before you tap anything, scored by quality, not by who paid.</p>
+<div class="devices c3"><figure class="device"><img src="../media/local/app/map-light.webp" alt="The map with Local Score pins" loading="lazy" decoding="async" width="1206" height="2622"><figcaption><span class="mode light">Light</span>Light</figcaption></figure><figure class="device"><img src="../media/local/app/map-dark.webp" alt="The map in dark mode" loading="lazy" decoding="async" width="1206" height="2622"><figcaption><span class="mode dark">Dark</span>Dark</figcaption></figure></div>
+</div>
+      <div class="sub"><h3>Saved</h3>
+<p>Saved splits Local’s picks from your own finds, and your finds can be filtered by where they came from: reels, notes or Maps. Paste a list and every place comes back as a real recommendation, with a score and what to order.</p>
+<div class="devices c4"><figure class="device"><img src="../media/local/app/saved-light.webp" alt="Saved places in light mode" loading="lazy" decoding="async" width="1206" height="2622"><figcaption><span class="mode light">Light</span>Your places</figcaption></figure><figure class="device"><img src="../media/local/app/saved-dark.webp" alt="Saved places in dark mode" loading="lazy" decoding="async" width="1206" height="2622"><figcaption><span class="mode dark">Dark</span>Filter by source</figcaption></figure><figure class="device"><img src="../media/local/app/saved-add.webp" alt="Pasting a list of places" loading="lazy" decoding="async" width="1206" height="2622"><figcaption><span class="mode light">Light</span>Paste a list</figcaption></figure><figure class="device"><img src="../media/local/app/saved-notes.webp" alt="Places saved from a notes list" loading="lazy" decoding="async" width="1206" height="2622"><figcaption><span class="mode light">Light</span>Saved, with picks</figcaption></figure></div>
+</div>
+      <div class="sub"><h3>Pricing</h3>
+<p>A three-day free trial, then $2.99 a month or $29.99 a year. The paywall leads with what you get: the exact dish to order, unlimited picks, reels and lists turned into saved spots, and dinners planned with friends.</p>
+<div class="devices c3"><figure class="device"><img src="../media/local/app/paywall.webp" alt="Local&#x27;s paywall" loading="lazy" decoding="async" width="1206" height="2622"><figcaption><span class="mode dark">Dark</span>The paywall</figcaption></figure></div>
+</div>
+    </section>
+    <section id="how" aria-labelledby="how-title">
+      <span class="eyebrow">How it works</span>
+      <h2 class="statement" id="how-title">Built from what the city actually says</h2>
+      <p>Every pick is read from critics, locals and the creators filming the city: Eater, the LA Times, the Infatuation, r/FoodLosAngeles, and the dishes people really order.</p>
+      <figure class="fig"><img src="../media/local/sources.webp" alt="The sources behind a Local pick" loading="lazy" decoding="async" width="2880" height="1636"><figcaption>The sources behind a pick.</figcaption></figure>
+      <p>Local Score rates how good a place is, using ratings, critic coverage, standout dishes and creator posts. Whether it fits you is a separate question, answered by the pick.</p>
+      <figure class="fig"><img src="../media/local/score.webp" alt="Local Score built from four signals" loading="lazy" decoding="async" width="2880" height="1698"><figcaption>One number, four signals.</figcaption></figure>
+      <div class="cards two"><div class="card"><span class="ic" aria-hidden="true">1</span><h4>Understand the ask first</h4><p>An intent and conversation layer on the Claude API reads the request before anything is searched: where, what kind of food, the occasion, and for groups, everyone’s budget and diet.</p></div><div class="card"><span class="ic" aria-hidden="true">2</span><h4>Search what people wrote</h4><p>A retrieval pipeline over reviews, critic coverage and creator content, stored as embeddings in Postgres with pgvector on Supabase.</p></div><div class="card"><span class="ic" aria-hidden="true">3</span><h4>Scope it to ship</h4><p>v1 is one city, LA, done properly: every source, score and dish pick built for one place before spreading thin. v2 takes the same setup to New York.</p></div><div class="card"><span class="ic" aria-hidden="true">4</span><h4>A waitlist before the app</h4><p>The landing page went live first, so there are people to hand the app to the day it’s ready.</p></div></div>
+      <p>Pick a request to see the parts the intent layer looks for. This is an illustration, not live output.</p>
+    <div class="demo intent-demo ui" id="intent-demo">
+      <div class="demo-head">
+        <div class="seg" role="group" aria-label="Sample requests"></div>
+        <span class="demo-note">Illustration, not live output</span>
+      </div>
+      <div class="demo-body id-body" aria-live="polite"></div>
+    </div>
+    </section>
+    <section id="site" aria-labelledby="site-title">
+      <span class="eyebrow">The landing page</span>
+      <h2 class="statement" id="site-title">eatwithlocal.com</h2>
+      <p>I designed and built the waitlist site to explain the app in three moves, ask, map and save, and to show the save-from-anywhere flows as they’d really happen on a phone.</p>
+      <figure class="fig tinted"><img src="../media/local/usecases.webp" alt="Ask, Map and Saved on the landing page" loading="lazy" decoding="async" width="2880" height="2288"><figcaption>Ask, Map and Saved.</figcaption></figure>
+      <figure class="fig"><img src="../media/local/reels.webp" alt="Saving a spot from an Instagram reel" loading="lazy" decoding="async" width="2880" height="1800"><figcaption>Share a reel to Local, and the creator gets credited.</figcaption></figure>
+      <figure class="fig"><img src="../media/local/maps.webp" alt="Importing a Google Maps list" loading="lazy" decoding="async" width="2880" height="1800"><figcaption>Bring your Google Maps lists.</figcaption></figure>
+    </section>
+    <section id="next" aria-labelledby="next-title">
+      <span class="eyebrow">What’s next</span>
+      <h2 class="statement" id="next-title">LA first, then more cities</h2>
+      <p>Local is in private beta in LA, and the waitlist is open at <a href="https://eatwithlocal.com" target="_blank" rel="noopener">eatwithlocal.com</a>. Next up is bringing Local to New York.</p>
+    </section>
+
+  </article>
+</div>
+<div class="next-case"><a href="caught-before-launch.html"><span><span class="label">Next project</span><span class="t">Caught before launch</span></span><span class="arrow" aria-hidden="true">→</span></a></div>
+
+</main>
+<script src="../assets/js/site.js"></script>
+<script src="../assets/js/demos.js"></script>
+</body>
+</html>
