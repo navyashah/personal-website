@@ -287,3 +287,10 @@ document.querySelectorAll('.pcard-media').forEach(media => {
   let saved = 'light'; try { saved = localStorage.getItem('mockup-mode') || 'light'; } catch (e) {}
   if (saved === 'dark') set('dark');
 })();
+
+/* ── Before/after slider ── */
+document.querySelectorAll('.ba-slider').forEach(fig => {
+  const r = fig.querySelector('.ba-range');
+  const set = v => fig.style.setProperty('--pos', v + '%');
+  r.addEventListener('input', () => set(r.value)); set(r.value);
+});
