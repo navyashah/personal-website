@@ -330,3 +330,13 @@
 .dial-demo .dd-col-head p { font-family: var(--sans); font-style: normal; color: var(--soft); }
 .dial-demo .dd-board { min-width: 1080px; grid-template-columns: repeat(5, minmax(190px, 1fr)) minmax(140px, .7fr); }
 .dial-demo .dd-who { white-space: nowrap; }
+/* More projects: simple, still row instead of the big marquee */
+.next-carousel { mask-image: none; padding: 56px var(--gutter) 80px; max-width: var(--max); margin: 0 auto; }
+.next-carousel::before { content: "More projects"; display: block; font-size: 14px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--soft); margin-bottom: 20px; }
+.nc-track { animation: none !important; width: auto; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+.nc-item[aria-hidden="true"] { display: none; }
+.nc-item { flex-direction: column; align-items: stretch; gap: 14px; }
+.nc-thumb { order: -1; width: 100%; height: auto; aspect-ratio: 16 / 10; transform: none; border-radius: 14px; }
+.nc-title { font-size: 22px; white-space: normal; font-weight: 600; }
+.nc-item:hover .nc-thumb { box-shadow: 0 0 0 2px var(--accent); }
+@media (max-width: 760px) { .nc-track { grid-template-columns: 1fr; } }
