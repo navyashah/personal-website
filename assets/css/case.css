@@ -176,7 +176,7 @@
 .fig .tag.live { background: var(--accent); color: #fff; padding: 4px 10px; border-radius: 999px; font-size: 12px; letter-spacing: .08em; }
 
 /* ── Readability floor: nothing under 13px ── */
-.label, .eyebrow, .facts-row dt, .fig figcaption, .device figcaption, .phones-row figcaption, .mode, .demo-note, .who-k small, .pd-sub, .tue-card .k, .ui small, .ui .k, .fw small, .dd-meta, .dd-sugg .tag, .dd-col-head .n, .fd-date, .pz-label, .pz-src, .stage-prompts b { font-size: max(13px, 1em) !important; }
+.label, .eyebrow, .facts-row dt, .mode, .demo-note { font-size: 14px !important; }
 .case-body .demo { font-size: 15px; }
 .dd-what, .sd-saw, .fw-read { font-size: 14px !important; }
 .before-block.single .before-strip { overflow: visible; }
@@ -305,3 +305,28 @@
   .ba-stage img { padding: 8px; }
   .nc-thumb { width: 140px; height: 92px; }
 }
+
+/* Dial demo: fixed, readable sizes */
+.dial-demo .dd-who { font-size: 15px; }
+.dial-demo .dd-what { font-size: 14px !important; line-height: 1.45; }
+.dial-demo .dd-meta { font-size: 13px; line-height: 1.4; }
+.dial-demo .dd-sugg .tag { font-size: 12px; letter-spacing: .06em; }
+.dial-demo .dd-sugg p { font-size: 13.5px; }
+.dial-demo .dd-col-head .n { font-size: 12px; }
+.dial-demo .dd-col-head p { font-size: 14px; }
+.dial-demo .dd-sugg .row .btn { font-size: 13px; padding: 5px 12px; }
+.dial-demo .dd-move button { width: 28px; height: 26px; font-size: 15px; }
+
+/* Headings: clean sans, easier to read than the serif */
+.case-head2 h1, .issue-h, .psr-card h3, .results3 h3, .results3 .big, .nc-title, .statement, .case-head h1 {
+  font-family: var(--sans) !important; font-weight: 700; letter-spacing: -.025em; }
+.case-head2 h1 { font-size: clamp(34px, 4.6vw, 60px); line-height: 1.12; }
+.issue-h { font-size: clamp(28px, 3vw, 40px); line-height: 1.2; }
+.case-head2 h1 em, .issue-h em { font-style: normal; }
+.psr-card h3 { font-size: 26px; }
+.issue-h { max-width: 32ch; }
+.dial-demo .dd-col ul { padding: 0 !important; margin: 0 !important; list-style: none; }
+.dial-demo .dd-col { padding: 12px 8px 16px; }
+.dial-demo .dd-col-head p { font-family: var(--sans); font-style: normal; color: var(--soft); }
+.dial-demo .dd-board { min-width: 1080px; grid-template-columns: repeat(5, minmax(190px, 1fr)) minmax(140px, .7fr); }
+.dial-demo .dd-who { white-space: nowrap; }

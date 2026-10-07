@@ -277,7 +277,7 @@ document.querySelectorAll('.pcard-media').forEach(media => {
   const sw = document.querySelector('.mode-switch');
   if (!sw) return;
   const imgs = [...document.querySelectorAll('img[src*="/proto/"]')].filter(i => /\/(fr|team)-[^/]+\.webp$/.test(i.src) && !/-dark\.webp$/.test(i.src));
-  imgs.forEach(i => { i.dataset.light = i.getAttribute('src'); i.dataset.dark = i.dataset.light.replace(/\.webp$/, '-dark.webp'); });
+  imgs.forEach(i => { i.dataset.light = i.getAttribute('src'); i.dataset.dark = i.dataset.light.replace(/(-wide)?\.webp$/, (m, w) => '-dark' + (w || '') + '.webp'); });
   const set = m => {
     imgs.forEach(i => i.setAttribute('src', i.dataset[m]));
     sw.querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', b.dataset.mode === m));

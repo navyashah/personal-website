@@ -638,3 +638,8 @@ body { overflow-x: hidden; }
 }
 @media (max-width: 420px) { .nav-links { gap: 14px; font-size: 14px; } .nav-home { font-size: 19px; } }
 .hero-photo { object-position: 50% 35%; }
+/* Home headings in the same readable sans */
+.hero h1, .split-title h2, .pcard-name, .footer h2, .about-words p { font-family: var(--sans); font-weight: 700; letter-spacing: -.03em; font-style: normal !important; }
+.hero h1 em { font-style: normal; color: var(--accent); }
+.split-title h2 { font-size: clamp(44px, 5vw, 76px); }
+.about-words p { font-size: clamp(44px, 5vw, 76px); }
