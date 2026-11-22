@@ -358,3 +358,31 @@
 .chips { display: block !important; }
 .chip2 { background: none !important; padding: 0 !important; border-radius: 0; font-size: 17px; }
 .chip2:not(:last-child)::after { content: ", "; }
+
+/* Before/after slider: one neutral stage, images aligned to the top, quiet labels */
+.ba-stage { background: #ECECE9; border-radius: 16px; }
+.ba-after-wrap { background: #ECECE9 !important; }
+.ba-stage img { inset: 28px 28px 0 !important; width: calc(100% - 56px) !important; height: calc(100% - 28px) !important; padding: 0 !important; object-fit: cover; object-position: top center; border-radius: 10px 10px 0 0; box-shadow: 0 0 0 1px rgba(0,0,0,.06); }
+.ba-tag { top: 10px; font-size: 11px; font-weight: 600; letter-spacing: .12em; padding: 3px 9px; z-index: 3; }
+.ba-tag.b, .ba-tag.a { background: rgba(255,255,255,.92); color: var(--ink); box-shadow: 0 0 0 1px rgba(0,0,0,.06); }
+.ba-tag.b { left: 10px; } .ba-tag.a { right: 10px; }
+.ba-handle { width: 1px; background: rgba(28,28,28,.55); }
+.ba-handle span { width: 34px; height: 34px; font-size: 15px; background: #fff; color: var(--ink); box-shadow: 0 0 0 1px rgba(0,0,0,.12), 0 6px 16px -6px rgba(0,0,0,.3); }
+@media (max-width: 760px) { .ba-stage img { inset: 14px 14px 0 !important; width: calc(100% - 28px) !important; height: calc(100% - 14px) !important; } }
+
+/* Launches page: the / shortcut menu, drawn in HTML */
+.slash-demo { margin: 28px 0 0; background: #fff; border-radius: 14px; box-shadow: 0 0 0 1px rgba(0,0,0,.07), 0 18px 40px -30px rgba(0,0,0,.3); padding: 18px; max-width: 560px; }
+.sd-input { display: flex; align-items: center; gap: 2px; border: 1px solid var(--rule); border-radius: 10px; padding: 10px 14px; font-size: 17px; }
+.sd-slash { font-weight: 600; }
+.sd-caret { width: 1px; height: 20px; background: var(--ink); animation: sdblink 1s steps(1) infinite; }
+@keyframes sdblink { 50% { opacity: 0; } }
+.slash-demo ul { list-style: none; margin: 10px 0 0; padding: 0; }
+.slash-demo li { display: flex; flex-direction: column; padding: 10px 12px; border-radius: 8px; font-size: 16px; line-height: 1.4; }
+.slash-demo li:first-child { background: #F1F1EE; }
+.slash-demo li span { color: var(--soft); font-size: 15px; }
+.sd-note { margin: 12px 4px 2px; font-size: 14px; color: var(--soft); }
+@media (prefers-reduced-motion: reduce) { .sd-caret { animation: none; } }
+.case-ext { display: inline-block; margin-top: 18px; }
+
+/* Flat neutral behind case-study hero images */
+.case-hero .panel { background: var(--panel) !important; }

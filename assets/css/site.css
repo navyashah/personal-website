@@ -646,7 +646,8 @@ body { overflow-x: hidden; }
 
 
 /* ── Calmer pass (Nov 2026): fewer template tricks ───────── */
-.hero-grid, .about-waves { display: none !important; }
+.about-waves { display: none !important; }
+.hero-grid { -webkit-mask-image: linear-gradient(90deg, transparent 0%, transparent 30%, #000 70%); mask-image: linear-gradient(90deg, transparent 0%, transparent 30%, #000 70%); }
 .pcard-media { background: var(--panel) !important; }
 .pcard-media.dark { background: #1E2126 !important; }
 .split-title h2, .split-title h2 span { font-size: clamp(30px, 2.8vw, 40px) !important; padding-left: 0 !important; display: block; line-height: 1.1; letter-spacing: -.02em; }

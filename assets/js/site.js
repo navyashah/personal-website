@@ -236,7 +236,7 @@ document.querySelectorAll('.pcard-media').forEach(media => {
 (function rippleGrid() {
   const hero = document.querySelector('.hero'), cv = hero && hero.querySelector('.hero-grid');
   if (!cv) return;
-  const ctx = cv.getContext('2d'), GAP = 28, SPEED = 0.32, LIFE = 1800, BAND = 46;
+  const ctx = cv.getContext('2d'), GAP = 30, SPEED = 0.28, LIFE = 1500, BAND = 34;
   let w, h, dpr, dots = [], waves = [], last = 0, lx = -999, ly = -999, raf = 0;
   function size() {
     dpr = Math.min(devicePixelRatio || 1, 2); w = hero.clientWidth; h = hero.clientHeight;
@@ -255,8 +255,8 @@ document.querySelectorAll('.pcard-media').forEach(media => {
         if (k > 0) e = Math.max(e, k * (1 - age / LIFE) * v.s);
       }
       const fade = Math.min(1, (h - y) / (h * .35) + .25);
-      ctx.fillStyle = e > 0.02 ? `rgba(234,88,12,${Math.min(1, 0.45 + e) * fade})` : `rgba(35,35,35,${.26 * fade})`;
-      ctx.beginPath(); ctx.arc(x, y, 1.6 + e * 2.8, 0, 6.283); ctx.fill();
+      ctx.fillStyle = e > 0.02 ? `rgba(194,65,12,${Math.min(.85, 0.25 + e * .7) * fade})` : `rgba(28,28,28,${.13 * fade})`;
+      ctx.beginPath(); ctx.arc(x, y, 1 + e * 1.1, 0, 6.283); ctx.fill();
     }
     raf = waves.length ? requestAnimationFrame(draw) : 0;
   }
@@ -264,10 +264,10 @@ document.querySelectorAll('.pcard-media').forEach(media => {
   if (!reduceMotion) {
     hero.addEventListener('pointermove', e => {
       const r = hero.getBoundingClientRect(), x = e.clientX - r.left, y = e.clientY - r.top, t = performance.now();
-      if (t - last > 120 && Math.hypot(x - lx, y - ly) > 30) { wave(x, y, .8); last = t; lx = x; ly = y; }
+      if (t - last > 120 && Math.hypot(x - lx, y - ly) > 30) { wave(x, y, .7); last = t; lx = x; ly = y; }
     });
     hero.addEventListener('pointerdown', e => { const r = hero.getBoundingClientRect(); wave(e.clientX - r.left, e.clientY - r.top, 1); });
-    setTimeout(() => wave(w * .7, h * .55, 1), 600);
+    setTimeout(() => wave(w * .72, h * .5, .8), 700);
   }
   addEventListener('resize', size); size();
 })();
