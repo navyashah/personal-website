@@ -657,3 +657,7 @@ body { overflow-x: hidden; }
 .pcard-ext { display: inline-block; margin-top: 2px; font-size: 15px; color: var(--soft); text-decoration: underline; text-decoration-color: var(--rule); text-underline-offset: 4px; transition: color .2s, text-decoration-color .2s; }
 .pcard-ext:hover { color: var(--accent); text-decoration-color: var(--accent); }
 @media (min-width: 761px) { .hero-hi { display: none; } }
+
+/* No single-word last lines */
+p, figcaption, .pcard-desc, dd { text-wrap: pretty; }
+.timeline li > span:last-child, .facts dd { text-wrap: balance; }
