@@ -386,3 +386,10 @@
 
 /* Flat neutral behind case-study hero images */
 .case-hero .panel { background: var(--panel) !important; }
+
+.mcp-pair { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: 20px; align-items: start; margin-top: 28px; }
+.mcp-pair .slash-demo { margin: 0; max-width: none; }
+.mcp-connect { margin: 0; }
+.mcp-connect img { width: 100%; max-width: 566px; height: auto; border-radius: 14px; box-shadow: 0 0 0 1px rgba(0,0,0,.07), 0 18px 40px -30px rgba(0,0,0,.4); }
+.mcp-connect figcaption { font-size: 15px; color: #4A4A4A; margin-top: 10px; line-height: 1.45; }
+@media (max-width: 860px) { .mcp-pair { grid-template-columns: 1fr; } }
