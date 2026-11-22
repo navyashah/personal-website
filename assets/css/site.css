@@ -643,3 +643,16 @@ body { overflow-x: hidden; }
 .hero h1 em { font-style: normal; color: var(--accent); }
 .split-title h2 { font-size: clamp(44px, 5vw, 76px); }
 .about-words p { font-size: clamp(44px, 5vw, 76px); }
+
+
+/* ── Calmer pass (Nov 2026): fewer template tricks ───────── */
+.hero-grid, .about-waves { display: none !important; }
+.pcard-media { background: var(--panel) !important; }
+.pcard-media.dark { background: #1E2126 !important; }
+.split-title h2, .split-title h2 span { font-size: clamp(30px, 2.8vw, 40px) !important; padding-left: 0 !important; display: block; line-height: 1.1; letter-spacing: -.02em; }
+.split-title h2 span { display: inline; }
+.about-words h2 { margin: 0; }
+.footer h2 { font-size: clamp(40px, 5vw, 72px) !important; }
+.pcard-ext { display: inline-block; margin-top: 2px; font-size: 15px; color: var(--soft); text-decoration: underline; text-decoration-color: var(--rule); text-underline-offset: 4px; transition: color .2s, text-decoration-color .2s; }
+.pcard-ext:hover { color: var(--accent); text-decoration-color: var(--accent); }
+@media (min-width: 761px) { .hero-hi { display: none; } }

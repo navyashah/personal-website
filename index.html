@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400..600;1,6..72,400..600&family=Hanken+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/site.css?v=3">
+  <link rel="stylesheet" href="assets/css/site.css?v=4">
 </head>
 <body>
 <a class="skip" href="#work">Skip to work</a>
@@ -20,6 +20,7 @@
     <a href="#work">Work</a>
     <a href="#about">About</a>
     <a href="#contact">Contact</a>
+    <a href="media/resume.pdf" target="_blank" rel="noopener">Resume</a>
   </nav>
 </header>
 
@@ -28,13 +29,13 @@
   <section class="hero" aria-labelledby="hero-title">
     <canvas class="hero-grid" aria-hidden="true"></canvas>
     <div class="hero-inner">
-      <p class="hero-hi"><img class="hero-photo" src="media/navya-headshot.webp" alt="" width="576" height="576">hi, I’m Navya</p>
+      <p class="hero-hi"><img class="hero-photo" src="media/navya-headshot.webp" alt="" width="576" height="576"></p>
       <h1 id="hero-title">
         <span class="line"><span>Product manager</span></span>
         <span class="line"><span>who <em>ships.</em></span></span>
       </h1>
       <div class="hero-sub">
-        <p>I’m the only PM at Ren, an AI startup that helps managers with hard conversations at work. I take things from a customer problem to shipped, and I design the screens myself.</p>
+        <p>I’m the only PM at Ren, an AI startup that helps managers with hard conversations at work. I take things from a customer problem to launch, and I design the screens myself.</p>
       </div>
     </div>
   </section>
@@ -43,8 +44,8 @@
   <section id="work" class="frame split" aria-labelledby="work-title">
     <div class="split-title">
       <div class="split-title-inner">
-        <h2 id="work-title">selected <span>work</span></h2>
-        <p>Four projects. Open any card for the full story, every screen and the reasoning behind it.</p>
+        <h2 id="work-title">Work</h2>
+        <p>Four projects. Open any one for the full story, the screens, and the reasoning behind them.</p>
       </div>
     </div>
 
@@ -56,9 +57,9 @@
             <span class="pcard-pill" aria-hidden="true">View case study</span>
           </div>
           <div class="pcard-meta"><span class="pcard-num">01</span><span class="pcard-name">Ren app redesign</span><span class="pcard-cat">AI product, desktop and mobile</span><span class="pcard-year">2026</span></div>
-          <p class="pcard-desc">Our biggest customers kept saying the same three things, so I redesigned the desktop and mobile app around them, and designed every screen myself.</p>
+          <p class="pcard-desc">Our biggest customers kept saying the same three things, so I redesigned the app around them. 94% of people who tried it stayed, so it became the only view.</p>
         </a>
-        <a class="badge try pcard-badge" data-text="Try it" href="https://app.tryren.com/signup" target="_blank" rel="noopener" aria-label="Try Ren free"></a>
+        <a class="pcard-ext" href="https://app.tryren.com/signup" target="_blank" rel="noopener">Try Ren ↗</a>
       </li>
       <li class="pcard">
         <a class="pcard-link" href="work/ren-website.html">
@@ -66,10 +67,10 @@
             <img src="media/website/now-hero.webp" alt="tryren.com homepage" loading="lazy" decoding="async">
             <span class="pcard-pill" aria-hidden="true">View case study</span>
           </div>
-          <div class="pcard-meta"><span class="pcard-num">02</span><span class="pcard-name">Ren website relaunch</span><span class="pcard-cat">Marketing site and go-to-market</span><span class="pcard-year">2026</span></div>
-          <p class="pcard-desc">I rebuilt the marketing site and reworked how Ren explains itself. Free-trial signups surged afterward, opening a second way in.</p>
+          <div class="pcard-meta"><span class="pcard-num">02</span><span class="pcard-name">Ren website relaunch</span><span class="pcard-cat">Website and product marketing</span><span class="pcard-year">2026</span></div>
+          <p class="pcard-desc">I rebuilt the marketing site and reworked how Ren explains itself, cutting most of the text and putting the real product front and center.</p>
         </a>
-        <a class="badge pcard-badge" data-text="Live site" href="https://tryren.com" target="_blank" rel="noopener" aria-label="Open tryren.com in a new tab"></a>
+        <a class="pcard-ext" href="https://tryren.com" target="_blank" rel="noopener">tryren.com ↗</a>
       </li>
       <li class="pcard">
         <a class="pcard-link" href="work/local.html">
@@ -82,7 +83,7 @@
           <div class="pcard-meta"><span class="pcard-num">03</span><span class="pcard-name">Local</span><span class="pcard-cat">My own app, AI and iOS</span><span class="pcard-year">2026</span></div>
           <p class="pcard-desc">An AI app that answers “where should we eat?” with one confident pick, built from what critics, locals and creators say.</p>
         </a>
-        <a class="badge pcard-badge" data-text="Live site" href="https://eatwithlocal.com" target="_blank" rel="noopener" aria-label="Open eatwithlocal.com in a new tab"></a>
+        <a class="pcard-ext" href="https://eatwithlocal.com" target="_blank" rel="noopener">eatwithlocal.com ↗</a>
       </li>
       <li class="pcard">
         <a class="pcard-link" href="work/caught-before-launch.html">
@@ -98,25 +99,22 @@
           <div class="pcard-meta"><span class="pcard-num">04</span><span class="pcard-name">Caught before launch</span><span class="pcard-cat">Product and security, Spin.AI and Quantech</span><span class="pcard-year">2025</span></div>
           <p class="pcard-desc">Three problems I found early at two security startups, and how each one got fixed.</p>
         </a>
-        <a class="badge try pcard-badge" data-text="Try it" href="work/caught-before-launch.html#api" aria-label="Try the data separation demo"></a>
+        <a class="pcard-ext" href="work/caught-before-launch.html#api">Try the demo →</a>
       </li>
     </ol>
   </section>
 
   <!-- About -->
-  <div class="about-waves" aria-hidden="true"><span></span><span></span><span></span></div>
   <section id="about" class="frame split rule-top" aria-labelledby="about-title">
     <div class="split-title">
-      <div class="about-words split-title-inner" id="about-title" aria-label="Listen, design, ship">
-        <p>Listen</p>
-        <p>Design</p>
-        <p>Ship</p>
+      <div class="about-words split-title-inner">
+        <h2 id="about-title">About</h2>
         <figure class="about-photo"><img src="media/navya-usc.webp" alt="Navya Shah at USC in her graduation stole, Class of 2025" width="1502" height="2000" loading="lazy" decoding="async"></figure>
       </div>
     </div>
     <div class="about-body">
       <div class="prose">
-        <p>I’m the product manager at Ren, an AI tool that helps managers with hard conversations at work. I’m the only PM, so I end up doing a bit of everything. Mostly that’s been talking to customers, redesigning the desktop and mobile app, and working closely with engineering to get it shipped.</p>
+        <p>I’m the product manager at Ren, an AI tool that helps managers with hard conversations at work. I’m the only PM, so I end up doing a bit of everything. Mostly that’s been talking to customers, redesigning the app, launching new products, and figuring out how we explain them.</p>
         <p>I recently finished my Master’s in Cybersecurity Engineering, along with my Bachelor’s in Economics and Data Science at USC. I like understanding how systems actually work, then turning messy, ambiguous problems into something concrete you can ship.</p>
         <p>Before Ren I was on the product team at Spin.AI, a SaaS security startup, and before that in product ops at Quantech in Mumbai. In both places a lot of the work was noticing what was broken before users did and getting it fixed. I’m also still building Local, an AI app that gives hyper-local restaurant recommendations from sources like reviews and creator content.</p>
       </div>
@@ -124,12 +122,12 @@
       <dl class="facts">
         <div><dt>Now</dt><dd>Product Manager at Ren, since July 2026</dd></div>
         <div><dt>Where</dt><dd>New York</dd></div>
-        <div><dt>School</dt><dd>USC, MS Cyber Security Engineering (2026) and BA Economics and Data Science (2025)</dd></div>
+        <div><dt>School</dt><dd>USC, MS Cybersecurity Engineering (2026) and BA Economics and Data Science (2025)</dd></div>
         <div><dt>Tools I design and build with</dt><dd>Pencil, Claude Code, React Native, Postgres, SQL, Python</dd></div>
       </dl>
 
       <ol class="timeline" aria-label="Experience">
-        <li><span class="when">Jul 2026 – now</span><span><b>Ren</b>, Product Manager. Sole PM across discovery, design, launch and go-to-market.</span></li>
+        <li><span class="when">Jul 2026 – now</span><span><b>Ren</b>, Product Manager. Sole PM across discovery, design and launch. Launched Ren inside Claude and ChatGPT, and Ren Live.</span></li>
         <li><span class="when">Mar 2026 – now</span><span><b>Local</b>, solo builder. AI restaurant recommendations, RAG on pgvector, Claude API.</span></li>
         <li><span class="when">Sep 2025 – Jun 2026</span><span><b>Spin.AI</b>, Product Management Intern. Partner controls feature, account switching, 100+ security control mappings.</span></li>
         <li><span class="when">Jun – Aug 2025</span><span><b>Quantech Datascience</b>, Product Operations Intern. Caught a data separation gap and a silent OCR failure before launch.</span></li>
@@ -141,7 +139,7 @@
 
   <!-- Contact -->
   <footer id="contact" class="frame rule-top footer">
-    <h2>let’s build something</h2>
+    <h2>Get in touch</h2>
     <a class="mail" href="mailto:navyashah6@gmail.com">navyashah6@gmail.com</a>
     <div class="footer-links">
       <a href="https://www.linkedin.com/in/navyashah6" target="_blank" rel="noopener">LinkedIn ↗</a>
